@@ -1,0 +1,4 @@
+# exclude everything except directory foo/bar
+hello_world_project/application.css
+hello_world_project/application.css.map
+hello_world_project/.sass-cache
