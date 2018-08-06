@@ -9,9 +9,7 @@ $earls-green: #BED23C;
 }
 /* soc contiene las tech de cada soc */
 .soc{
-    display: flex;
-    flex-direction: column;
-    width: auto;
+    margin: 100px auto;
 }
 
 /* techs-container contiene los box con cada tecnología */
@@ -29,9 +27,26 @@ $earls-green: #BED23C;
     flex-direction: column;
     justify-content: space-evenly;
     height: 300px;
-    margin: 10px;
+    margin: 10px -10px -10px 10px;
     padding: 10px;
     width: 200px;    
+}
+
+.tech-border {
+    background-color: white;
+    border:  2px solid $earls-green;
+    margin: 15px;
+    border-radius: 5px;
+}
+
+.tech-border:hover {
+    transform: translate(20px,20px);
+    transition-duration: 0.5s;
+}
+
+.tech:hover {
+    transform: translate(-20px,-20px);
+    transition-duration: 0.5s;
 }
 
 /* tech-logo es la clase para el logo de cada tech */
