@@ -1,15 +1,15 @@
 .title-container {
-    height: 90px;
-    width: 70;
+    height: 100px;
+    width: 100%;
 }
 
 .title-text {
     color: black;
     font-size: 24px;
     font-family: 'Roboto';
-    left: 50px;
-    position: absolute;    
-    top: 35px;
+    //left: 50px;
+    position: relative;    
+    //top: 35px;
     vertical-align: middle;
 }
 
