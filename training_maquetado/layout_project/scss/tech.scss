@@ -1,19 +1,23 @@
 $earls-green: #BED23C;
 
-/* soc-container contiene los box con los soc */
-.soc-container {
+/* contiene a los socs*/
+.socs-container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 30px;
+}
+/* soc contiene las tech de cada soc */
+.soc{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: auto;
-    max-width: 100%;
-
 }
 
 /* techs-container contiene los box con cada tecnología */
 .techs-container {
     display: flex;
-    //flex-direction: row;
-
+    flex-wrap: wrap;
 }
 
 /* tech es la clase asociada a cada tecnlogia en particular */
@@ -23,19 +27,17 @@ $earls-green: #BED23C;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     height: 300px;
     margin: 10px;
     padding: 10px;
-    width: 200px;
-    
+    width: 200px;    
 }
+
 /* tech-logo es la clase para el logo de cada tech */
 .tech-logo {
-    height: auto;
-    width: auto;
-    max-width: 100px;
-    max-height: 100px;
+    height: 100px;
+    width: 100px;
     z-index: 0;
 }
 
