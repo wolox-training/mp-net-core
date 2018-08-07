@@ -1,0 +1,26 @@
+$silver: #C4C4C4;
+
+.navbar {
+    align-items: center;
+    display: flex;
+    background-color: white ;
+    box-shadow: 0 2px 15px $silver ;
+    font-size: 24px;
+    height: 70px;
+    justify-content: space-between;
+    padding: 20px;
+    margin: 0 0 10px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+}
+
+.nav-img {
+    height: 30px;
+    width: auto;
+}
+
+.nav-title {
+    font-size: 24px;
+}
