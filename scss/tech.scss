@@ -1,9 +1,7 @@
-$earls-green: #BED23C;
-
 .soc-container {
   display: flex;
   width: auto;
-  max-width: 100%
+  max-width: 1024px;
 
 }
 
@@ -26,23 +24,21 @@ $earls-green: #BED23C;
 }
 
 .tech-logo {
-  height: auto;
-  width: auto;
-  max-width: 100px;
-  max-height: 100px;
+  height: 100px;
+  width: 100px;
   z-index: 0;
 }
 
 .tech-title {
-  font-size: 16px;
+  font-size: $text-medium;
 }
 
 .tech-release {
   font-weight: bold;
-  font-size: 16px;
+  font-size: $text-medium;
 }
 
 .tech-info {
-  font-size: 12px;
+  font-size: $text-small;
   text-align: center;
 }
