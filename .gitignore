@@ -1,3 +1,5 @@
-hello_world_project/application.css
-hello_world_project/application.css.map
-hello_world_project/.sass-cache
+*.css
+*.css.map
+.sass-cache/*.css
+.sass-cache/*.css.map
+.sass-cache/*/*.scssc
