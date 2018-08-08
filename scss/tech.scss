@@ -1,13 +1,11 @@
 .soc-container {
   display: flex;
   width: auto;
-  max-width: 1024px;
-
+  max-width: $content-default-width;
 }
 
 .techs-container {
   display: flex;
-
 }
 
 .tech {
