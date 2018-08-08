@@ -1,0 +1,44 @@
+.soc-container {
+  display: flex;
+  width: auto;
+  max-width: 1024px;
+
+}
+
+.techs-container {
+  display: flex;
+
+}
+
+.tech {
+  align-items: center;
+  background-color: $earls-green;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 300px;
+  margin: 10px;
+  padding: 10px;
+  width: 200px;  
+}
+
+.tech-logo {
+  height: 100px;
+  width: 100px;
+  z-index: 0;
+}
+
+.tech-title {
+  font-size: $text-medium;
+}
+
+.tech-release {
+  font-weight: bold;
+  font-size: $text-medium;
+}
+
+.tech-info {
+  font-size: $text-small;
+  text-align: center;
+}
