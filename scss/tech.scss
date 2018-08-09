@@ -1,11 +1,9 @@
-.soc-container {
+.layer-container {
   display: flex;
-  width: auto;
+  width: 100%;
   max-width: $content-default-width;
-}
-
-.techs-container {
-  display: flex;
+  margin: auto;
+  flex-wrap: wrap;
 }
 
 .tech {
@@ -24,7 +22,6 @@
 .tech-logo {
   height: 100px;
   width: 100px;
-  z-index: 0;
 }
 
 .tech-title {
