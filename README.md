@@ -1,1 +1,0 @@
-# mp-net-core
