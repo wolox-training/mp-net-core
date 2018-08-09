@@ -1,8 +1,3 @@
-.title-container {
-    height: 100px;
-    width: 100%;
-}
-
 .title-text {
   display: flex;
   color: $black;
@@ -14,10 +9,13 @@
   justify-content: left;
   padding: 10px;
 
-.title-deco {
+  &::before{
+    content: '';
+    background: url(img/triangle.svg) no-repeat;
     height: 90px;
-    position: relative;
-    vertical-align: middle;
+    transform: translateX(20px);
     width: 70px;
     z-index: -1;
+  }
 }
+  

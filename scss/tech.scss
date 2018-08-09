@@ -47,17 +47,9 @@ body {
   }
 }
 
-.tech {
-    align-items: center;
-    background-color: $earls-green;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 300px;
-    margin: 10px -10px -10px 10px;
-    padding: 10px;
-    width: 200px;    
+.tech-logo {
+  height: 100px;
+  width: 100px;
 }
 
 .tech-title {
