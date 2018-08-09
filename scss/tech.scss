@@ -2,7 +2,7 @@
   display: flex;
   width: 100%;
   max-width: $content-default-width;
-  margin: auto;
+  margin: 100px auto;
   flex-wrap: wrap;
 }
 
@@ -15,6 +15,7 @@
   justify-content: space-around;
   height: 300px;
   margin: 10px;
+  margin: 10px -10px -10px 10px;
   padding: 10px;
   width: 200px;  
 }
@@ -22,6 +23,23 @@
 .tech-logo {
   height: 100px;
   width: 100px;
+}
+
+.tech-border {
+  background-color: white;
+  border:  2px solid $earls-green;
+  margin: 15px;
+  border-radius: 5px;
+}
+
+.tech-border:hover {
+  transform: translate(20px,20px);
+  transition-duration: 0.5s;
+}
+
+.tech:hover {
+  transform: translate(-20px,-20px);
+  transition-duration: 0.5s;
 }
 
 .tech-title {
