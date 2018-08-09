@@ -1,64 +1,3 @@
-<<<<<<< HEAD
-$earls-green: #BED23C;
-
-/* contiene a los socs*/
-.socs-container {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1200px;
-    padding: 0 30px;
-}
-/* soc contiene las tech de cada soc */
-.soc{
-    display: flex;
-    flex-direction: column;
-    width: auto;
-}
-
-/* techs-container contiene los box con cada tecnología */
-.techs-container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-/* tech es la clase asociada a cada tecnlogia en particular */
-.tech {
-    align-items: center;
-    background-color: $earls-green;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 300px;
-    margin: 10px;
-    padding: 10px;
-    width: 200px;    
-}
-
-/* tech-logo es la clase para el logo de cada tech */
-.tech-logo {
-    height: 100px;
-    width: 100px;
-    z-index: 0;
-}
-
-/* tech-title titulo la tecnologia */
-.tech-title {
-    font-size: 16px;
-}
-
-/* release de la tech*/
-.tech-release {
-    font-weight: bold;
-    font-size: 16px;
-}
-
-
-/* tech-info la información de la tecnologia */
-.tech-info {
-    font-size: 12px;
-    text-align: center;
-=======
 .layer-container {
   display: flex;
   width: 100%;
@@ -97,5 +36,4 @@ $earls-green: #BED23C;
 .tech-info {
   font-size: $text-small;
   text-align: center;
->>>>>>> layout_project_2
 }
