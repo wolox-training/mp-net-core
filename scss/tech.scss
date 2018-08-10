@@ -1,9 +1,16 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .layer-container {
   display: flex;
-  width: 100%;
-  max-width: $content-default-width;
-  margin: 100px auto;
   flex-wrap: wrap;
+  max-width: $content-default-width;
+  margin: 10px auto;
+  width: 100%;
+  padding: 10px 80px;
 }
 
 .tech {
@@ -12,12 +19,29 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 300px;
-  margin: 10px;
-  margin: 10px -10px -10px 10px;
+  min-height: 300px;
+  margin: 15px;
   padding: 10px;
-  width: 200px;  
+  position: relative;
+  font-size: $text-medium;
+  width: 200px;
+
+  &::before {
+    content: '';
+    border: 1px solid $earls-green;
+    border-radius: 5px;
+    height: 100%;
+    left: -10px;
+    position: absolute;
+    width: 100%;
+    transition: top 0.5s, left 0.5s;
+    top: -10px;    
+  }  
+}
+
+.tech:hover::before {
+  top: 10px;
+  left: 10px;
 }
 
 .tech-logo {
@@ -25,33 +49,16 @@
   width: 100px;
 }
 
-.tech-border {
-  background-color: white;
-  border:  2px solid $earls-green;
-  margin: 15px;
-  border-radius: 5px;
-}
-
-.tech-border:hover {
-  transform: translate(20px,20px);
-  transition-duration: 0.5s;
-}
-
-.tech:hover {
-  transform: translate(-20px,-20px);
-  transition-duration: 0.5s;
-}
-
 .tech-title {
-  font-size: $text-medium;
+  margin-top: 10px;
 }
 
 .tech-release {
   font-weight: bold;
-  font-size: $text-medium;
+  margin-top: 10px;
 }
 
 .tech-info {
-  font-size: $text-small;
+  margin-top: 15px;
   text-align: center;
 }
