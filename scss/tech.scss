@@ -1,9 +1,16 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .layer-container {
   display: flex;
-  width: 100%;
-  max-width: $content-default-width;
-  margin: 100px auto;
   flex-wrap: wrap;
+  max-width: $content-default-width;
+  margin: 10px auto;
+  width: 100%;
+  padding: 10px 50px;
 }
 
 .tech {
@@ -12,10 +19,11 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 300px;
-  margin: 10px;
+  min-height: 300px;
+  margin: 15px;
   padding: 10px;
+  position: relative;
+  font-size: $text-medium;
   width: 200px;  
 }
 
@@ -25,15 +33,15 @@
 }
 
 .tech-title {
-  font-size: $text-medium;
+  margin-top: 10px;
 }
 
 .tech-release {
   font-weight: bold;
-  font-size: $text-medium;
+  margin-top: 10px;
 }
 
 .tech-info {
-  font-size: $text-small;
+  margin-top: 15px;
   text-align: center;
 }

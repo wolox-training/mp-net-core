@@ -4,9 +4,10 @@
   font-size: $text-big;
   position: relative;
   height: 100px;
-  width: 100%;
+  width: 60%;
   align-items: center;
   justify-content: left;
+  padding: 10px;
 
   &::before{
     content: '';
