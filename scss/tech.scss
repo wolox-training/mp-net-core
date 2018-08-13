@@ -1,3 +1,81 @@
+@media only screen and (min-width: 768px){
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+  }
+  
+  .layer-container {
+    align-items: center;
+    display: grid;
+    grid-gap: 10px 10px;
+    grid-template-areas: 
+      "main-tech sec-tech-1 sec-tech-3"
+      "main-tech sec-tech-2 sec-tech-4";
+    grid-template-columns: 220px 220px 220px;
+    grid-template-rows: 320px 320px;
+    justify-content: center;
+    justify-items: center;
+    max-width: $content-default-width;
+    margin: 10px auto;
+    width: 100%;
+    padding: 10px 50px;
+  }
+  
+  .tech {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 300px;
+    margin: 15px;
+    padding: 10px;
+    position: relative;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .tech-logo {
+    height: 100px;
+    width: 100px;
+  }
+  
+  .tech-title {
+    margin-top: 10px;
+  }
+  
+  .tech-release {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .tech-info {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  #tech-react, #tech-rails {
+    grid-area: main-tech;
+    border-right: 2px solid $earls-green;
+  }
+  
+  #tech-angular, #tech-nodejs {
+    grid-area: sec-tech-1;
+  }
+  
+  #tech-django, #tech-elm {
+    grid-area: sec-tech-2;
+  }
+  #tech-vue, #tech-netcore {
+    grid-area: sec-tech-3;
+  }
+  #tech-polymer {
+    grid-area: sec-tech-4;
+  }
+}
+
 body {
   display: flex;
   flex-direction: column;

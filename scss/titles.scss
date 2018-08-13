@@ -1,20 +1,27 @@
-.title-text {
-  display: flex;
-  color: $black;
-  font-size: $text-big;
-  position: relative;
-  height: 100px;
-  width: 60%;
-  align-items: center;
-  justify-content: left;
-  padding: 10px;
+@media only screen and (max-width: 768px){
+  .title-text {
+    display: flex;
+    color: red;
+    font-size: $text-big;
+    position: relative;
+    height: 100px;
+    width: 60%;
+    align-items: center;
+    justify-content: left;
+    padding: 10px;
 
-  &::before{
-    content: '';
-    background: url(img/triangle.svg) no-repeat;
-    height: 90px;
-    transform: translateX(20px);
-    width: 70px;
-    z-index: -1;
+    &::before{
+      content: '';
+      background: url(img/triangle.svg) no-repeat;
+      height: 90px;
+      transform: translateX(20px);
+      width: 70px;
+      z-index: -1;
+    }
   }
+}
+
+.title-text {
+  width: 60%;
+  color: $black;
 }
