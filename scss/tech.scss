@@ -6,8 +6,16 @@ body {
 }
 
 .layer-container {
-  display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  display: grid;
+  grid-gap: 10px 10px;
+  grid-template-areas: 
+    "main-tech sec-tech-1 sec-tech-3"
+    "main-tech sec-tech-2 sec-tech-4";
+  grid-template-columns: 220px 220px 220px;
+  grid-template-rows: 320px 320px;
+  justify-content: center;
+  justify-items: center;
   max-width: $content-default-width;
   margin: 10px auto;
   width: 100%;
@@ -15,36 +23,17 @@ body {
 }
 
 .tech {
+  justify-content: center;
   align-items: center;
-  background-color: $earls-green;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
+  height: 100%;
   min-height: 300px;
   margin: 15px;
   padding: 10px;
   position: relative;
-  font-size: $text-medium;
-  width: 200px;
-
-  &::before {
-    content: '';
-    border: 1px solid $earls-green;
-    border-radius: 5px;
-    height: 100%;
-    left: -10px;
-    position: absolute;
-    width: 100%;
-    transition: top 0.5s, left 0.5s;
-    top: -10px;    
-  }  
-
-  &:hover{
-    &::before{
-      top: 10px;
-      left: 10px;
-    }
-  }
+  font-size: 16px;
+  width: 100%;
 }
 
 .tech-logo {
@@ -64,4 +53,23 @@ body {
 .tech-info {
   margin-top: 15px;
   text-align: center;
+}
+
+#tech-react, #tech-rails {
+  grid-area: main-tech;
+  border-right: 2px solid $earls-green;
+}
+
+#tech-angular, #tech-nodejs {
+  grid-area: sec-tech-1;
+}
+
+#tech-django, #tech-elm {
+  grid-area: sec-tech-2;
+}
+#tech-vue, #tech-netcore {
+  grid-area: sec-tech-3;
+}
+#tech-polymer {
+  grid-area: sec-tech-4;
 }
