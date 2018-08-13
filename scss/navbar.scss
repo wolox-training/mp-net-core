@@ -3,7 +3,7 @@
   display: flex;
   background-color: $white;
   box-shadow: 0 2px 15px $silver ;
-  font-size: 24px;
+  font-size: $text-big;
   height: 70px;
   justify-content: space-between;
   padding: 20px;
@@ -14,8 +14,8 @@
 }
 
 .nav-img {
-  height: 30px;
-  width: auto;
+    height: 30px;
+    width: auto;
 }
 
 .nav-title {
