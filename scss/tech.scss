@@ -24,7 +24,26 @@ body {
   padding: 10px;
   position: relative;
   font-size: $text-medium;
-  width: 200px;  
+  width: 200px;
+
+  &::before {
+    content: '';
+    border: 1px solid $earls-green;
+    border-radius: 5px;
+    height: 100%;
+    left: -10px;
+    position: absolute;
+    width: 100%;
+    transition: top 0.5s, left 0.5s;
+    top: -10px;    
+  }  
+
+  &:hover{
+    &::before{
+      top: 10px;
+      left: 10px;
+    }
+  }
 }
 
 .tech-logo {
