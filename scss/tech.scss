@@ -9,11 +9,10 @@ body {
   align-items: center;
   display: grid;
   grid-gap: 10px 10px;
-  grid-template-areas: 
-    "main-tech sec-tech-1 sec-tech-2"
-    "main-tech sec-tech-3 sec-tech-4";
-  grid-template-columns: repeat(3,220px);
-  grid-template-rows: repeat(2,320px);
+  grid-template: 
+    [row1-start] "main-tech sec-tech-1 sec-tech-2" 320px [row1-end]
+    [row2-start] "main-tech sec-tech-3 sec-tech-4" 320px [row2-end]
+    / 220px 220px 220px;
   justify-content: center;
   justify-items: center;
   max-width: $content-default-width;
