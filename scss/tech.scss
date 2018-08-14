@@ -9,8 +9,8 @@ body {
   align-items: center;
   display: grid;
   grid-gap: 10px 10px;
-  grid-template-columns: repeat(3,220px);
-  grid-template-rows: repeat(2,320px);
+  grid-template-columns: 220px;
+  grid-template-rows: repeat(5,320px);
   justify-content: center;
   justify-items: center;
   max-width: $content-default-width;
@@ -34,8 +34,11 @@ body {
   
   &:first-child {
     grid-column: 1 / 2;
-    grid-row: 1 / 3;
-    border-right: 2px solid $earls-green;
+    grid-row: 1 / 2;
+  }
+
+  &:nth-child(n+2) {
+    border-top: 2px solid $earls-green;
   }
 }
 
@@ -56,4 +59,22 @@ body {
 .tech-info {
   margin-top: 15px;
   text-align: center;
+} 
+
+
+@media only screen and (min-width: 1024px){
+  .layer-container {
+    grid-template-columns: repeat(3,220px);
+    grid-template-rows: repeat(2,320px);
+  }
+  .tech {
+    &:first-child {
+      grid-column: 1 / 2;
+      grid-row: 1 / 3;
+      border-right: 2px solid $earls-green;
+    }
+    &:nth-child(n+2) {
+      border-top: none;
+    }    
+  }
 }

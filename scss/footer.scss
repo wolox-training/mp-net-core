@@ -10,12 +10,12 @@
 }
 
 .footer-img {
-  height: 60px;
-  margin: 5px;
+  height: 36px;
+  margin: 3px;
 }
 
 .footer-title {
-  font-size: $text-big;
+  font-size: $text-medium;
   color:$white;
   margin: 5px;
 }
@@ -23,5 +23,21 @@
 .footer-copyright {
   color:$white;
   font-size: $text-small;
-  align-self: flex-end;
+  align-self: center;
+  padding-top: 30px;
+}
+
+@media only screen and (min-width: 1024px){
+  .footer-img {
+    height: 60px;
+    margin: 5px;
+  }
+  
+  .footer-title {
+    font-size: $text-big;
+  }
+  
+  .footer-copyright {
+    align-self: flex-end;
+  }
 }
