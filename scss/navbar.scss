@@ -1,11 +1,7 @@
 .navbar {
-  align-items: center;
-  display: flex;
   background-color: $white;
   box-shadow: 0 2px 15px $silver ;
-  font-size: $text-big;
   height: 70px;
-  justify-content: space-between;
   padding: 20px;
   position: fixed;
   top: 0;
@@ -19,5 +15,17 @@
 }
 
 .nav-title {
-  font-size: $text-big;
+  display: none;
+}
+
+@media only screen and (min-width: 1024px){
+  .navbar {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav-title {
+    display: inline-block;
+    font-size: $text-big; 
+  }
 }
