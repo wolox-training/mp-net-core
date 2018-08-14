@@ -1,4 +1,4 @@
-@media only screen and (min-width: 768px){
+@media only screen and (min-width: 1024px){
   body {
     display: flex;
     flex-direction: column;
@@ -73,6 +73,7 @@
   }
   #tech-polymer {
     grid-area: sec-tech-4;
+<<<<<<< b2980d7d80fdf7744e9dfa635273babb2c9d0ebd
   }
 }
 
@@ -134,4 +135,7 @@ body {
 .tech-info {
   margin-top: 15px;
   text-align: center;
+=======
+  }  
+>>>>>>> Responsive in process
 }
