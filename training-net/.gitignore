@@ -1,0 +1,7 @@
+*.css
+*.css.map
+.sass-cache
+.vscode
+bin
+obj
+appsettings.Development.json
