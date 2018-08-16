@@ -2,4 +2,4 @@
 bin
 obj
 appsettings.Development.json
-launchSettings.json
+src/Properties/launchSettings.json
