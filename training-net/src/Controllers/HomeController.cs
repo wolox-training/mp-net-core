@@ -5,12 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using training_net.Models;
+using Microsoft.AspNetCore.Mvc.Localization;
+using System.Globalization;
 
 namespace training_net.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index() => View();
+      /*   public HomeController(IHtmlLocalizer<HomeController> localizer)
+        {
+            this._localizer = localizer;
+        } */
+        public IActionResult Index()
+        {
+/*             ViewData["HelloWorldButton"] = localizerEsp["HelloWorldButton"]; 
+ */            return View();
+        }
 
         public IActionResult About()
         {
