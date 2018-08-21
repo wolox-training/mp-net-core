@@ -1,5 +1,5 @@
 .vscode
-bin
-obj
+**/bin
+**/obj
 appsettings.Development.json
 launchSettings.json
