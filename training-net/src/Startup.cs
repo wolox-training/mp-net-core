@@ -12,7 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MvcMovie.Repositories.Database;
 
-
 namespace training_net
 {
     public class Startup
