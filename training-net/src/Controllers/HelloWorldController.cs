@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Encodings.Web;
 
 namespace training_net.Controllers
 {
-    public class HelloWorldController : Controller
+  public class HelloWorldController : Controller
     {
         public IActionResult Index()
         {

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using MvcMovie.Models;
-using MvcMovie.Repositories.Database;
-using Queries.Core.Repositories;
 using System.Linq;
+using training_net.Repositories.Interfaces;
+using training_net.Repositories.Database;
+using training_net.Models;
 
-namespace Queries.Persistence.Repositories
+namespace training_net.Repositories
 {
   public class MovieRepository : Repository<Movie>, IMovieRepository
     {

@@ -1,12 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MvcMovie.Repositories.Database;
-using Queries.Core.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using training_net.Repositories.Database;
+using training_net.Repositories.Interfaces;
 
-namespace Queries.Persistence.Repositories
+namespace training_net.Repositories
 {
   public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {

@@ -1,31 +1,28 @@
-﻿using MvcMovie.Repositories.Database;
-using Queries.Core;
-using Queries.Core.Repositories;
-using Queries.Persistence.Repositories;
+﻿using training_net.Repositories.Interfaces;
 
-namespace Queries.Persistence
+namespace training_net.Repositories.Database
 {
-    public class UnitOfWork : IUnitOfWork
+  public class UnitOfWork : IUnitOfWork
     {
         private readonly DataBaseContext _context;
 
         public UnitOfWork(DataBaseContext context)
         {
-            _context = context;
-            Movies = new MovieRepository(_context);
+            this._context = context;
+            this.MovieRepository = new MovieRepository(this._context);
 
         }
 
-        public IMovieRepository Movies { get; private set; }
+        public IMovieRepository MovieRepository { get; private set; }
 
         public int Complete()
         {
-            return _context.SaveChanges();
+            return this._context.SaveChanges();
         }
 
         public void Dispose()
         {
-            _context.Dispose();
+            this._context.Dispose();
         }
     }
 }

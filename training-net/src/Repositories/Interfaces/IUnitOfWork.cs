@@ -1,11 +1,10 @@
-using Queries.Core.Repositories;
 using System;
 
-namespace Queries.Core
+namespace training_net.Repositories.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+  public interface IUnitOfWork : IDisposable
     {
-        IMovieRepository Movies { get; }
+        IMovieRepository MovieRepository { get; }
         int Complete();
     }
 }

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using MvcMovie.Models;
+using training_net.Models;
 
-namespace Queries.Core.Repositories
+namespace training_net.Repositories.Interfaces
 {
-    public interface IMovieRepository : IRepository<Movie>
+  public interface IMovieRepository : IRepository<Movie>
     {
         IEnumerable<Movie> GetLastestMovies(int rank);
     }
