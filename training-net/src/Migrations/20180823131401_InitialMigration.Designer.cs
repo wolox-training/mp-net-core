@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using training_net.Repositories.Database;
 
-namespace trainingnet.Migrations
+namespace training_net.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
     [Migration("20180823131401_InitialMigration")]
