@@ -13,10 +13,10 @@ namespace training_net.Controllers
         }
         public IActionResult Index()
         {
-            var localizerEsp = _localizer.WithCulture(new CultureInfo("en-US"));
-            ViewData["HelloWorldButton"] = _localizer["HelloWorldButton"].Value;            
-            ViewData["firstTitle"] = _localizer["HelloWorldTitle"].Value;            
-            ViewData["firstParagraph"] = _localizer["HelloWorldParagraph"].Value;
+            var localizer = _localizer.WithCulture(new CultureInfo("en-US"));
+            ViewData["HelloWorldButton"] = localizer["HelloWorldButton"].Value;            
+            ViewData["firstTitle"] = localizer["HelloWorldTitle"].Value;            
+            ViewData["firstParagraph"] = localizer["HelloWorldParagraph"].Value;
             return View();
         }
     }
