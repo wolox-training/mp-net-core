@@ -1,9 +1,9 @@
 #region Using
 using Microsoft.EntityFrameworkCore;
-using MvcMovie.Models;
+using training_net.Models;
 #endregion
 
-namespace MvcMovie.Repositories.Database
+namespace training_net.Repositories.Database
 {
     public class DataBaseContext : DbContext
     {

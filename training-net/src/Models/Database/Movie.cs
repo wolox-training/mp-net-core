@@ -1,6 +1,6 @@
 using System;
 
-namespace MvcMovie.Models
+namespace training_net.Models
 {
     public class Movie
     {
