@@ -17,11 +17,6 @@ namespace training_net.Controllers
         {
             get { return this._unitOfWork; }
         }
-
-        public IActionResult Index()
-        {
-                  
-            return View();
-        }
+        public IActionResult Index() => View();
     }
 }

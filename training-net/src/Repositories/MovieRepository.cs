@@ -9,10 +9,6 @@ namespace training_net.Repositories
   public class MovieRepository : Repository<Movie>, IMovieRepository
     {
         public MovieRepository(DataBaseContext context) : base(context){}
-
-        public IEnumerable<Movie> GetLastestMovies(int rank)
-        {
-            return Context.Movies.OrderBy(c => c.ReleaseDate.ToString("yyyy")).Take(rank).ToList();
-        } 
+        public IEnumerable<Movie> GetLastestMovies(int rank) => this.Context.Movies.OrderBy(c => c.ReleaseDate.ToString("yyyy")).Take(rank).ToList();
     }
 }
