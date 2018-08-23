@@ -7,16 +7,20 @@ using training_net.Repositories.Interfaces;
 
 namespace training_net.Repositories
 {
-  public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+  public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly DataBaseContext Context;
-        public Repository(DataBaseContext context) => this.Context = context;
-        public TEntity Get(int id) => this.Context.Set<TEntity>().Find(id);
-        public IEnumerable<TEntity> GetAll() => this.Context.Set<TEntity>().ToList();
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate) => this.Context.Set<TEntity>().Where(predicate);
-        public void Add(TEntity entity) => this.Context.Set<TEntity>().Add(entity);
-        public void AddRange(IEnumerable<TEntity> entities) => this.Context.Set<TEntity>().AddRange(entities);
-        public void Remove(TEntity entity) => this.Context.Set<TEntity>().Remove(entity);
-        public void RemoveRange(IEnumerable<TEntity> entities) => this.Context.Set<TEntity>().RemoveRange(entities);
+        protected readonly DataBaseContext _context;
+        public DataBaseContext Context
+        {
+            get { return this._context;}
+        }
+        public Repository(DataBaseContext context) => this._context = context;
+        public T Get(int id) => Context.Set<T>().Find(id);
+        public IEnumerable<T> GetAll() => Context.Set<T>().ToList();
+        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate) => Context.Set<T>().Where(predicate);
+        public void Add(T entity) => Context.Set<T>().Add(entity);
+        public void AddRange(IEnumerable<T> entities) => Context.Set<T>().AddRange(entities);
+        public void Remove(T entity) => Context.Set<T>().Remove(entity);
+        public void RemoveRange(IEnumerable<T> entities) => Context.Set<T>().RemoveRange(entities);
     }
 }
