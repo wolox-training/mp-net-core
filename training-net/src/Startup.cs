@@ -33,7 +33,7 @@ namespace training_net
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            CultureInfo.CurrentUICulture = new CultureInfo("es-AR");
+            CultureInfo.CurrentUICulture = new CultureInfo(Configuration["DefaultLang"]);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

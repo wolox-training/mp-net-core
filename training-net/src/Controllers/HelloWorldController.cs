@@ -13,9 +13,8 @@ namespace training_net.Controllers
         }
         public IActionResult Index()
         {
-            ViewData["HelloWorldButton"] = _localizer["HelloWorldButton"].Value;            
-            ViewData["firstTitle"] = _localizer["HelloWorldTitle"].Value;            
-            ViewData["firstParagraph"] = _localizer["HelloWorldParagraph"].Value;
+            ViewData["Title"] = _localizer["HelloWorldTitle"].Value;            
+            ViewData["Paragraph"] = _localizer["HelloWorldParagraph"].Value;
             return View();
         }
     }
