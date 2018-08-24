@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace training_net.Controllers
 {
-  public class HelloWorldController : Controller
+    public class HelloWorldController : Controller
     {
         public IActionResult Index()
         {

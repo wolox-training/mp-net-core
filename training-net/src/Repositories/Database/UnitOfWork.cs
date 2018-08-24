@@ -5,6 +5,7 @@ namespace training_net.Repositories.Database
   public class UnitOfWork : IUnitOfWork
     {
         private readonly DataBaseContext _context;
+
         public UnitOfWork(DataBaseContext context)
         {
             this._context = context;
@@ -12,7 +13,9 @@ namespace training_net.Repositories.Database
         }
 
         public IMovieRepository MovieRepository { get; private set; }
+
         public int Complete() => this._context.SaveChanges();
+        
         public void Dispose() => this._context.Dispose();
     }
 }

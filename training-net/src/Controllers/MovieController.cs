@@ -7,16 +7,20 @@ using training_net.Repositories.Interfaces;
 
 namespace training_net.Controllers
 {
-  public class MovieController : Controller
+    public class MovieController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public MovieController(IUnitOfWork unitOfWork){
+        
+        public MovieController(IUnitOfWork unitOfWork)
+        {
             this._unitOfWork = unitOfWork;
         }
+
         public IUnitOfWork UnitOfWork
         {
             get { return this._unitOfWork; }
         }
+
         public IActionResult Index() => View();
     }
 }
