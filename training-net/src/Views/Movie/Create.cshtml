@@ -1,17 +1,14 @@
-@page
-@model training_net.Models.Views
+@using Microsoft.AspNetCore.Mvc.Localization
 
-<h2>@ViewData["Title"]</h2>
-<p>@ViewData["Paragraph"]</p>
+@model training_net.Models.Views.MovieViewModel
 
-<div>
-<a asp-action="Index">Back to list</a>
-</div>
+@inject IViewLocalizer Localizer
 
-<form asp-action="Create">
+<h2>@Localizer["MovieCreateTitle"].Value</h2>
+<p>@Localizer["MovieCreateParagraph"].Value</p>
+
+<form asp-action="OnPost">
     <div class="form-horizontal">
-        <h4>Movie</h4>
-        <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label  asp-for="Genre" class="control-label col-md-2"></label>
@@ -30,12 +27,12 @@
         <div class="form-group">
             <label  asp-for="ReleaseDate" class="control-label col-md-2"></label>
             <div class="col-md-10">
-                <input asp-for="ReleaseDate" class="form-control" type="text" id="ReleaseDate" name="ReleaseDate"/>
+                <input asp-for="ReleaseDate" class="form-control" type="date" id="ReleaseDate" name="ReleaseDate"/>
                 <span asp-validation-for="ReleaseDate" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label  asp-for="ReleaseDate" class="control-label col-md-2"></label>
+            <label  asp-for="Title" class="control-label col-md-2"></label>
             <div class="col-md-10">
                 <input asp-for="Title" class="form-control" type="text" id="Title" name="Title"/>
                 <span asp-validation-for="Title" class="text-danger"></span>
@@ -48,3 +45,7 @@
         </div>
     </div>
 </form>
+
+<div>
+<a asp-action="Index">@Localizer["BackToList"].Value</a>
+</div>

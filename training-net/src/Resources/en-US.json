@@ -5,5 +5,6 @@
     "MovieControllerTitle": "My Movie List",
     "MovieControllerParagraph": "The Movie List is unavailable. Meanwhile you can add a movie to the database.",
     "MovieCreateTitle": "Create a new movie",
-    "MovieCreateParagraph": "Fill the following form to create a new movie register:",
+    "MovieCreateParagraph": "Fill the following form to create a new movie register: ",
+    "BackToList": "Back to list",
 }
