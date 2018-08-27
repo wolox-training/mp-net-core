@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using training_net.Models.Views;
 using training_net.Repositories.Interfaces;
@@ -34,6 +35,23 @@ namespace training_net.Controllers
                 Price = movie.Price
             });
             UnitOfWork.Complete();
+            return RedirectToAction("Index","Movie");
+        }
+
+        [HttpPost("Save")]
+        [ValidateAntiForgeryToken]
+        public Task<IActionResult> OnPost([FromBody] MovieViewModel movie)
+        {
+            if (!ModelState.IsValid) 
+                return View();
+
+            UnitOfWork.MovieRepository.Add(new Movie {
+                Title = movie.Title,
+                ReleaseDate = movie.ReleaseDate,
+                Genre = movie.Genre,
+                Price = movie.Price
+            });
+            _unitOfWork.Complete();
             return RedirectToAction("Index","Movie");
         }
     }
