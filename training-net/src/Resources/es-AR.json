@@ -1,5 +1,7 @@
 {
     "HelloWorldButton": "Hola Mundo!",
     "HelloWorldTitle": "Este título es generado por el CONTROLADOR",
-    "HelloWorldParagraph": "...y este párrafo también..."
+    "HelloWorldParagraph": "...y este párrafo también...",
+    "MovieControllerTitle": "Mi Lista de Películas",
+    "MovieControllerParagraph": "La lista de películas no está disponible. Mientras tanto, puedes agregar una película a la base de datos.",
 }
