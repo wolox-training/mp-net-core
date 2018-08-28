@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using training_net.Models.Views;
 using training_net.Repositories.Interfaces;
 using training_net.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace training_net.Controllers
 {
@@ -44,6 +45,45 @@ namespace training_net.Controllers
                 Price = movie.Price
             });
             UnitOfWork.Complete();
+            return RedirectToAction("Index","Movie");
+        }
+
+        [HttpGet("Edit")]
+        public IActionResult Edit(int? id)
+        {
+            if(id == null)
+                return NotFound();
+            
+            var movie = UnitOfWork.MovieRepository.Get(id.Value);
+            if(movie == null)
+                return NotFound();
+            return View(movie);
+        }
+        
+        [HttpPost("SaveEdit")]
+        [ValidateAntiForgeryToken]
+        public IActionResult OnPostEdit(int id, [FromForm] MovieViewModel movie)
+        {
+            Movie temp = UnitOfWork.MovieRepository.Get(id);
+            /* if(id != temp.ID)
+                return NotFound(); */
+
+            if(ModelState.IsValid)
+            {
+                try
+                {
+                    temp.Genre = movie.Genre;
+                    temp.Price = movie.Price;
+                    temp.ReleaseDate = movie.ReleaseDate;
+                    temp.Title = movie.Title;
+                    UnitOfWork.Complete();
+                }
+                catch(DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+                return RedirectToAction("Index","Movie");
+            }
             return RedirectToAction("Index","Movie");
         }
     }

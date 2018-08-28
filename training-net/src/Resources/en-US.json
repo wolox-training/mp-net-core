@@ -12,4 +12,6 @@
     "Genre": "Género",
     "Price": "Precio",
     "Title": "Título",
+    "MovieEditTitle": "Edit movie",
+    "MovieEditParagraph": "Fill the following form to edit the selected movie: ",
 }
