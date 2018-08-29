@@ -1,38 +1,36 @@
 @using Microsoft.AspNetCore.Mvc.Localization
-
 @model training_net.Models.Views.MovieViewModel
-
 @inject IViewLocalizer Localizer
 
-<h2>@Localizer["MovieCreateTitle"].Value</h2>
-<p>@Localizer["MovieCreateParagraph"].Value</p>
+<h2>@Localizer["MovieCreateTitle"]</h2>
+<p>@Localizer["MovieCreateParagraph"]</p>
 
 <form asp-action="OnPost">
     <div class="form-horizontal">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label  asp-for="Genre" class="control-label col-md-2">@Localizer["Genre"].Value</label>
+            <label  asp-for="Genre" class="control-label col-md-2">@Localizer["Genre"]</label>
             <div class="col-md-10">
                 <input asp-for="Genre" class="form-control" type="text" id="Genre" name="Genre"/>
                 <span asp-validation-for="Genre" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label  asp-for="Price" class="control-label col-md-2">@Localizer["Price"].Value</label>
+            <label  asp-for="Price" class="control-label col-md-2">@Localizer["Price"]</label>
             <div class="col-md-10">
                 <input asp-for="Price" class="form-control" type="text" id="Price" name="Price"/>
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label  asp-for="ReleaseDate" class="control-label col-md-2">@Localizer["ReleaseDate"].Value</label>
+            <label  asp-for="ReleaseDate" class="control-label col-md-2">@Localizer["ReleaseDate"]</label>
             <div class="col-md-10">
                 <input asp-for="ReleaseDate" class="form-control" type="date" id="ReleaseDate" name="ReleaseDate"/>
                 <span asp-validation-for="ReleaseDate" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label  asp-for="Title" class="control-label col-md-2">@Localizer["Title"].Value</label>
+            <label  asp-for="Title" class="control-label col-md-2">@Localizer["Title"]</label>
             <div class="col-md-10">
                 <input asp-for="Title" class="form-control" type="text" id="Title" name="Title"/>
                 <span asp-validation-for="Title" class="text-danger"></span>
@@ -40,12 +38,12 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value=@Localizer["SaveButton"].Value class="btn btn-default" />
+                <input type="submit" value=@Localizer["SaveButton"] class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-<a asp-action="Index">@Localizer["BackToList"].Value</a>
+<a asp-action="Index">@Localizer["BackToList"]</a>
 </div>

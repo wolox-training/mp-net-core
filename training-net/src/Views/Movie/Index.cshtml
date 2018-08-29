@@ -1,10 +1,9 @@
 @using Microsoft.AspNetCore.Mvc.Localization
-
 @inject IViewLocalizer Localizer
 
-<h2>@Localizer["MovieControllerTitle"].Value</h2>
-<p>@Localizer["MovieControllerParagraph"].Value</p>
+<h2>@Localizer["MovieControllerTitle"]</h2>
+<p>@Localizer["MovieControllerParagraph"]</p>
 
 <div>
-<a asp-action="Create">@Localizer["MovieCreateTitle"].Value</a>
+<a asp-action="Create">@Localizer["MovieCreateTitle"]</a>
 </div>

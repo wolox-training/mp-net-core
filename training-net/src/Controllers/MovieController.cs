@@ -33,7 +33,7 @@ namespace training_net.Controllers
                 Genre = movie.Genre,
                 Price = movie.Price
             });
-            _unitOfWork.Complete();
+            UnitOfWork.Complete();
             return RedirectToAction("Index","Movie");
         }
     }
