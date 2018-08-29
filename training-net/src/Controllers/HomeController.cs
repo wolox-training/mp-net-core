@@ -12,14 +12,9 @@ namespace training_net.Controllers
 {
     public class HomeController : Controller
     {
-      /*   public HomeController(IHtmlLocalizer<HomeController> localizer)
-        {
-            this._localizer = localizer;
-        } */
         public IActionResult Index()
         {
-/*             ViewData["HelloWorldButton"] = localizerEsp["HelloWorldButton"]; 
- */            return View();
+            return View();
         }
 
         public IActionResult About()
