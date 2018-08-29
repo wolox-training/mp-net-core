@@ -1,5 +1,6 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+@model System.Collections.Generic.List<training_net.Models.Views.MovieViewModel>
 
 <h2>@Localizer["MovieControllerTitle"]</h2>
 <p>@Localizer["MovieControllerParagraph"]</p>
@@ -11,16 +12,16 @@
     <thead>
         <tr>
             <th>
-                @Localizer["Genre"].Value
+                @Localizer["Genre"]
             </th>
             <th>
-                @Localizer["Price"].Value
+                @Localizer["Price"]
             </th>
             <th>
-                @Localizer["ReleaseDate"].Value
+                @Localizer["ReleaseDate"]
             </th>
             <th>
-                @Localizer["Title"].Value
+                @Localizer["Title"]
             </th>
             <th></th>
         </tr>
