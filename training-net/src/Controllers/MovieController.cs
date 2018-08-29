@@ -65,9 +65,6 @@ namespace training_net.Controllers
         public IActionResult OnPostEdit(int id, [FromForm] MovieViewModel movie)
         {
             Movie temp = UnitOfWork.MovieRepository.Get(id);
-            /* if(id != temp.ID)
-                return NotFound(); */
-
             if(ModelState.IsValid)
             {
                 try
