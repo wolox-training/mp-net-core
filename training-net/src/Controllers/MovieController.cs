@@ -1,26 +1,40 @@
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using training_net.Models.Views;
-using training_net.Repositories.Database;
 using training_net.Repositories.Interfaces;
+using training_net.Models;
 
 namespace training_net.Controllers
 {
+    [Route("Movie")]
     public class MovieController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        
-        public MovieController(IUnitOfWork unitOfWork)
-        {
-            this._unitOfWork = unitOfWork;
-        }
+        public MovieController(IUnitOfWork unitOfWork) => this._unitOfWork = unitOfWork;
 
         public IUnitOfWork UnitOfWork
         {
-            get { return this._unitOfWork; }
+            get => this._unitOfWork;
         }
 
-        public IActionResult Index() => View();
+        [HttpGet("")]
+        public IActionResult Index() => View(UnitOfWork.MovieRepository.GetAll().ToList());
+
+        [HttpGet("Create")]
+        public IActionResult Create() => View();
+
+        [HttpPost("Save")]
+        [ValidateAntiForgeryToken]
+        public IActionResult OnPost([FromForm] MovieViewModel movie)
+        {
+            UnitOfWork.MovieRepository.Add(new Movie {
+                Title = movie.Title,
+                ReleaseDate = movie.ReleaseDate,
+                Genre = movie.Genre,
+                Price = movie.Price
+            });
+            UnitOfWork.Complete();
+            return RedirectToAction("Index","Movie");
+        }
     }
 }

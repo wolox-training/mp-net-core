@@ -1,5 +1,16 @@
 {
     "HelloWorldButton": "Salut monde!",
     "HelloWorldTitle": "Ce titre est généré par le CONTROLLER",
-    "HelloWorldParagraph": "...et ce paragraphe aussi..."
+    "HelloWorldParagraph": "...et ce paragraphe aussi...",
+    "MovieControllerTitle": "Ma Liste de Films",
+    "MovieControllerParagraph": "La liste des films n'est pas disponible. En attendant, vous pouvez ajouter un film à la base de données.",
+    "MovieCreateTitle": "Créer un nouveau film",
+    "MovieCreateParagraph": "Remplissez le formulaire suivant pour créer un nouvel enregistrement: ",
+    "BackToList": "Retour à la liste",
+    "SaveButton": "Enregistrer",
+    "ReleaseDate": "Date de sortie",
+    "Genre": "Genre",
+    "Price": "Prix",
+    "Title": "Titre",
+
 }
