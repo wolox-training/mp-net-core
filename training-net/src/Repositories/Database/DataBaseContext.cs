@@ -8,10 +8,7 @@ namespace training_net.Repositories.Database
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options) {}
 
         public DbSet<Movie> Movies { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
-    }
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder) => base.OnModelCreating(modelBuilder);
+    }   
 }
