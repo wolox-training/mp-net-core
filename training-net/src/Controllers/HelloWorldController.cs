@@ -18,7 +18,6 @@ namespace training_net.Controllers
             get { return this._localizer; }
         }
 
-
         public IActionResult Index()
         {
             ViewData["Title"] = Localizer["HelloWorldTitle"].Value;            

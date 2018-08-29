@@ -36,6 +36,8 @@ namespace training_net.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult OnPost([FromForm] MovieViewModel movie)
         {
+            if (!ModelState.IsValid) 
+                return View();
             UnitOfWork.MovieRepository.Add(new Movie {
                 Title = movie.Title,
                 ReleaseDate = movie.ReleaseDate,
@@ -43,23 +45,6 @@ namespace training_net.Controllers
                 Price = movie.Price
             });
             UnitOfWork.Complete();
-            return RedirectToAction("Index","Movie");
-        }
-
-        [HttpPost("Save")]
-        [ValidateAntiForgeryToken]
-        public Task<IActionResult> OnPost([FromBody] MovieViewModel movie)
-        {
-            if (!ModelState.IsValid) 
-                return View();
-
-            UnitOfWork.MovieRepository.Add(new Movie {
-                Title = movie.Title,
-                ReleaseDate = movie.ReleaseDate,
-                Genre = movie.Genre,
-                Price = movie.Price
-            });
-            _unitOfWork.Complete();
             return RedirectToAction("Index","Movie");
         }
     }
