@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using training_net.Models.Views;
 using training_net.Repositories.Interfaces;
