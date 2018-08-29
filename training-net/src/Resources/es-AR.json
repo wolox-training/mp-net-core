@@ -7,4 +7,9 @@
     "MovieCreateTitle": "Crear una nueva película",
     "MovieCreateParagraph": "Completa el siguiente formulario para crear un nuevo registro: ",
     "BackToList": "Regresar a la lista",
+    "SaveButton": "Guardar",
+    "ReleaseDate": "Fecha de lanzamiento",
+    "Genre": "Género",
+    "Price": "Precio",
+    "Title": "Título",
 }
