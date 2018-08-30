@@ -5,9 +5,10 @@
 <h2>@Localizer["MovieCreateTitle"]</h2>
 <p>@Localizer["MovieCreateParagraph"]</p>
 
-<form asp-action="OnPost">
+<form asp-action="Create">
     <div class="form-horizontal">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ID" />
         <div class="form-group">
             <label  asp-for="Genre" class="control-label col-md-2">@Localizer["Genre"]</label>
             <div class="col-md-10">

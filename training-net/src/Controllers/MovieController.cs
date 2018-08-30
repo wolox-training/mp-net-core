@@ -18,15 +18,25 @@ namespace training_net.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult Index() => View(UnitOfWork.MovieRepository.GetAll().ToList());
+        public IActionResult Index() => View(UnitOfWork.MovieRepository.GetAll().Select(
+            movie => new MovieViewModel {
+                ID = movie.ID,
+                Title = movie.Title,
+                ReleaseDate = movie.ReleaseDate,
+                Genre = movie.Genre,
+                Price = movie.Price
+            }
+        ).ToList());
 
         [HttpGet("Create")]
         public IActionResult Create() => View();
 
-        [HttpPost("Save")]
+        [HttpPost("Create")]
         [ValidateAntiForgeryToken]
-        public IActionResult OnPost([FromForm] MovieViewModel movie)
+        public IActionResult Create([FromForm] MovieViewModel movie)
         {
+            if (!ModelState.IsValid) 
+                return RedirectToAction("Create","Movie");
             UnitOfWork.MovieRepository.Add(new Movie {
                 Title = movie.Title,
                 ReleaseDate = movie.ReleaseDate,
