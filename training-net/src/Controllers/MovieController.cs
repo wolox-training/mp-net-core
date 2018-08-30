@@ -89,7 +89,7 @@ namespace training_net.Controllers
                 }
                 return RedirectToAction("Index","Movie");
             }
-            return RedirectToAction("Edit","Movie", new{ID=id});
+            return RedirectToAction("Edit","Movie", new{ID=id});        
         }
     }
 }
