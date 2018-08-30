@@ -108,5 +108,23 @@ namespace training_net.Controllers
                 throw;
             }
         }
+
+        [HttpGet("Details")]
+        public IActionResult Details(int? id)
+        {
+            if(id == null)
+                return NotFound();
+            
+            MovieViewModel model = new MovieViewModel();
+            var movie = UnitOfWork.MovieRepository.Get(id.Value);
+            if(movie == null)
+                return NotFound();
+            model.ID = movie.ID;
+            model.Genre = movie.Genre;
+            model.Price = movie.Price;
+            model.ReleaseDate = movie.ReleaseDate;
+            model.Title = movie.Title;
+            return View(model);
+        }
     }
 }
