@@ -36,7 +36,7 @@ namespace training_net.Controllers
         public IActionResult OnPost([FromForm] MovieViewModel movie)
         {
             if (!ModelState.IsValid) 
-                return View();
+                return RedirectToAction("Index","Movie");
             UnitOfWork.MovieRepository.Add(new Movie {
                 Title = movie.Title,
                 ReleaseDate = movie.ReleaseDate,
