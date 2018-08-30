@@ -1,15 +1,16 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 
-@model training_net.Models.Movie
+@model training_net.Models.Views.MovieViewModel
 
 @inject IViewLocalizer Localizer
 
 <h2>@Localizer["MovieEditTitle"].Value</h2>
 <p>@Localizer["MovieEditParagraph"].Value</p>
 
-<form asp-action="OnPostEdit">
+<form asp-action="Edit">
     <div class="form-horizontal">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ID" />
         <div class="form-group">
             <label  asp-for="Genre" class="control-label col-md-2"></label>
             <div class="col-md-10">

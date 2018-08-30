@@ -54,25 +54,33 @@ namespace training_net.Controllers
             if(id == null)
                 return NotFound();
             
+            MovieViewModel model = new MovieViewModel();
             var movie = UnitOfWork.MovieRepository.Get(id.Value);
             if(movie == null)
                 return NotFound();
-            return View(movie);
+            model.ID = movie.ID;
+            model.Genre = movie.Genre;
+            model.Price = movie.Price;
+            model.ReleaseDate = movie.ReleaseDate;
+            model.Title = movie.Title;
+            return View(model);
         }
         
-        [HttpPost("SaveEdit")]
+        [HttpPost("Edit")]
         [ValidateAntiForgeryToken]
-        public IActionResult OnPostEdit(int id, [FromForm] MovieViewModel movie)
+        public IActionResult Edit(int id, [FromForm] MovieViewModel movie)
         {
-            Movie temp = UnitOfWork.MovieRepository.Get(id);
+            var temp = UnitOfWork.MovieRepository.Get(id);
             if(ModelState.IsValid)
             {
                 try
                 {
+                    temp.ID = id;
                     temp.Genre = movie.Genre;
                     temp.Price = movie.Price;
                     temp.ReleaseDate = movie.ReleaseDate;
                     temp.Title = movie.Title;
+                    UnitOfWork.MovieRepository.Update(temp);
                     UnitOfWork.Complete();
                 }
                 catch(DbUpdateConcurrencyException)
@@ -81,7 +89,7 @@ namespace training_net.Controllers
                 }
                 return RedirectToAction("Index","Movie");
             }
-            return RedirectToAction("Index","Movie");
+            return RedirectToAction("Edit","Movie", new{ID=id});
         }
     }
 }
