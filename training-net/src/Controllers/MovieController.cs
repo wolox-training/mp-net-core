@@ -31,12 +31,12 @@ namespace training_net.Controllers
         [HttpGet("Create")]
         public IActionResult Create() => View();
 
-        [HttpPost("Save")]
+        [HttpPost("Create")]
         [ValidateAntiForgeryToken]
-        public IActionResult OnPost([FromForm] MovieViewModel movie)
+        public IActionResult Create([FromForm] MovieViewModel movie)
         {
             if (!ModelState.IsValid) 
-                return RedirectToAction("Index","Movie");
+                return RedirectToAction("Create","Movie");
             UnitOfWork.MovieRepository.Add(new Movie {
                 Title = movie.Title,
                 ReleaseDate = movie.ReleaseDate,
