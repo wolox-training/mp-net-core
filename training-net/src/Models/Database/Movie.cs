@@ -5,7 +5,7 @@ namespace training_net.Models
 {
     public class Movie
     {
-        public int ID { get; set; }
+        public int Id { get; set; }//
         public string Title { get; set; }
         [Display(Name = "Release Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

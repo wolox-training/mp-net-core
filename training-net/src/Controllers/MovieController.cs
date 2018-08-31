@@ -1,10 +1,10 @@
+using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using training_net.Models.Views;
 using training_net.Repositories.Interfaces;
 using training_net.Models;
-using System;
 
 namespace training_net.Controllers
 {
@@ -23,7 +23,7 @@ namespace training_net.Controllers
         public IActionResult Index() => View(UnitOfWork.MovieRepository.GetAll().Select(
             movie => new MovieViewModel
             {
-                ID = movie.ID,
+                Id = movie.Id,
                 Title = movie.Title,
                 ReleaseDate = movie.ReleaseDate,
                 Genre = movie.Genre,
@@ -40,7 +40,7 @@ namespace training_net.Controllers
         {
             try
             {
-                ModelState.Remove("ID");
+                ModelState.Remove("Id");
                 if (!ModelState.IsValid) 
                     return RedirectToAction("Create","Movie");
                 UnitOfWork.MovieRepository.Add(new Movie
@@ -70,7 +70,7 @@ namespace training_net.Controllers
                 var movie = UnitOfWork.MovieRepository.Get(id.Value);
                 if (movie == null)
                     throw new NullReferenceException();
-                movieVM.ID = movie.ID;
+                movieVM.Id = movie.Id;
                 movieVM.Genre = movie.Genre;
                 movieVM.Price = movie.Price;
                 movieVM.ReleaseDate = movie.ReleaseDate;
@@ -94,7 +94,7 @@ namespace training_net.Controllers
                     return RedirectToAction("Edit", "Movie", new { ID = id });
                 }
                 var movieM = UnitOfWork.MovieRepository.Get(id);
-                movieM.ID = id;
+                movieM.Id = id;
                 movieM.Genre = movieVM.Genre;
                 movieM.Price = movieVM.Price;
                 movieM.ReleaseDate = movieVM.ReleaseDate;
