@@ -1,13 +1,11 @@
 @using Microsoft.AspNetCore.Mvc.Localization
-
 @model training_net.Models.Views.MovieViewModel
-
 @inject IViewLocalizer Localizer
 
-<h2>@Localizer["MovieEditTitle"].Value</h2>
-<p>@Localizer["MovieEditParagraph"].Value</p>
+<h2>@ViewData["AddEditTitle"]</h2>
+<p>@ViewData["AddEditPar"]</p>
 
-<form asp-action="Edit">
+<form asp-action="@ViewData["FormAction"]">
     <div class="form-horizontal">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="ID" />
@@ -48,5 +46,5 @@
 </form>
 
 <div>
-<a asp-action="Index">@Localizer["BackToList"].Value</a>
+    <a asp-action="Index">@Localizer["BackToList"].Value</a>
 </div>

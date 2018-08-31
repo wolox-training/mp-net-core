@@ -2,6 +2,11 @@
 @model training_net.Models.Views.MovieViewModel
 @inject IViewLocalizer Localizer
 
-@{ViewData["btnText"] = Localizer["SaveButton"].Value;}
+@{
+    ViewData["btnText"] = Localizer["SaveButton"].Value;
+    ViewData["AddEditTitle"] = Localizer["MovieCreateTitle"].Value;
+    ViewData["AddEditPar"] = Localizer["MovieCreateParagraph"].Value;
+    ViewData["FormAction"] = "Create";
+}
 
-<partial name="~/Views/Shared/_AddEditForm.cshtml" view-data="ViewData" />
+<partial name="~/Views/Shared/_Form.cshtml" view-data="ViewData" />
