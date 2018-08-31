@@ -119,7 +119,7 @@ namespace training_net.Controllers
             var movie = UnitOfWork.MovieRepository.Get(id.Value);
             if(movie == null)
                 return NotFound();
-            model.ID = movie.ID;
+            model.Id = movie.Id;
             model.Genre = movie.Genre;
             model.Price = movie.Price;
             model.ReleaseDate = movie.ReleaseDate;
