@@ -1,5 +1,6 @@
 {
     "BackToList": "Retour à la liste",
+    "Delete": "Effacer",
     "Genre": "Genre",
     "HelloWorldButton": "Salut monde!",
     "HelloWorldParagraph": "...et ce paragraphe aussi...",
@@ -9,6 +10,7 @@
     "MovieControllerTitle": "Ma Liste de Films",
     "MovieCreateParagraph": "Remplissez le formulaire suivant pour créer un nouvel enregistrement: ",
     "MovieCreateTitle": "Créer un nouveau film",
+    "MovieDeleteParagraph": "Êtes-vous sûr de vouloir supprimer ceci?",
     "MovieDetailsTitle": "Détails",
     "MovieEditParagraph": "Remplissez le formulaire suivant pour modifier le film sélectionné: ",
     "MovieEditTitle": "Modifier un film",

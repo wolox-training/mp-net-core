@@ -1,0 +1,36 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model training_net.Models.Views.MovieViewModel
+
+<h2>@ViewData["DetailsDeleteTitle"]</h2>
+
+<div>
+    <h4>@Localizer["Movie"]</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Localizer["Genre"]
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+        <dt>
+            @Localizer["Price"]
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Localizer["ReleaseDate"]
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+        <dt>
+            @Localizer["Title"]
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+    </dl>
+</div>

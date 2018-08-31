@@ -1,5 +1,6 @@
 {
     "BackToList": "Back to list",
+    "Delete": "Delete",    
     "Genre": "Género",
     "HelloWorldButton": "Hello World!",
     "HelloWorldParagraph": "...and this paragraph too...",
@@ -9,6 +10,7 @@
     "MovieControllerTitle": "My Movie List",
     "MovieCreateParagraph": "Fill the following form to create a new movie register: ",
     "MovieCreateTitle": "Create a new movie",
+    "MovieDeleteParagraph": "Are you sure you want to delete this?",
     "MovieDetailsTitle": "Details",
     "MovieEditParagraph": "Fill the following form to edit the selected movie: ",
     "MovieEditTitle": "Edit movie",
