@@ -26,6 +26,8 @@ namespace training_net.Repositories
 
         public void Add(T entity) => Context.Set<T>().Add(entity);
 
+        public void Update(T entity) => Context.Set<T>().Update(entity); 
+
         public void AddRange(IEnumerable<T> entities) => Context.Set<T>().AddRange(entities);
 
         public void Remove(T entity) => Context.Set<T>().Remove(entity);
