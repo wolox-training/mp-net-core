@@ -5,9 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using training_net.Models.Views;
 using training_net.Repositories.Interfaces;
 using training_net.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace training_net.Controllers
 {
+    [Authorize]
     [Route("Movie")]
     public class MovieController : Controller
     {

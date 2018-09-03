@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using training_net.Models;
 using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace training_net.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         [HttpGet("")]
         public IActionResult Index()
         {

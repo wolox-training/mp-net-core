@@ -1,4 +1,5 @@
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
 
@@ -18,6 +19,7 @@ namespace training_net.Controllers
             get { return this._localizer; }
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             ViewData["Title"] = Localizer["HelloWorldTitle"].Value;            

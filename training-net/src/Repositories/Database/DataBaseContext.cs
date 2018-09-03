@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using training_net.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using training_net.Models;
 
 namespace training_net.Repositories.Database
 {

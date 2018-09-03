@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using training_net.Repositories.Database;
 using training_net.Repositories.Interfaces;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using training_net.Models;
 
 namespace training_net
 {
@@ -27,6 +30,13 @@ namespace training_net
             services.AddJsonLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc().AddViewLocalization();
             services.AddDbContext<DataBaseContext>(options =>  options.UseNpgsql(Configuration["ConnectionString"]));
+            services.AddIdentity<User, IdentityRole>(options => 
+            {
+                options.Cookies.ApplicationCookie.LoginPath = "/Account/Login";
+                options.Cookies.ApplicationCookie.AccessDeniedPath = "/Account/AccessDenied";
+            })
+                .AddEntityFrameworkStores<DataBaseContext>()
+                .AddDefaultTokenProviders();            
             services.AddScoped<DataBaseContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.Configure<CookiePolicyOptions>(options =>
@@ -58,6 +68,7 @@ namespace training_net
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseCookiePolicy();
 
             app.UseMvc();
