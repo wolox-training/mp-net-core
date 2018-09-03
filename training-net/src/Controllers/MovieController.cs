@@ -112,35 +112,49 @@ namespace training_net.Controllers
         [HttpGet("Details")]
         public IActionResult Details(int? id)
         {
-            if (id == null)
+            try
+            {
+                if (id == null)
+                    throw new NullReferenceException();
+                MovieViewModel movieVM = new MovieViewModel();
+                var movie = UnitOfWork.MovieRepository.Get(id.Value);
+                if (movie == null)
+                    return NotFound();
+                movieVM.Id = movie.Id;
+                movieVM.Genre = movie.Genre;
+                movieVM.Price = movie.Price;
+                movieVM.ReleaseDate = movie.ReleaseDate;
+                movieVM.Title = movie.Title;
+                return View(movieVM);
+            }
+            catch (NullReferenceException)
+            {
                 return NotFound();
-            MovieViewModel movieVM = new MovieViewModel();
-            var movie = UnitOfWork.MovieRepository.Get(id.Value);
-            if (movie == null)
-                return NotFound();
-            movieVM.Id = movie.Id;
-            movieVM.Genre = movie.Genre;
-            movieVM.Price = movie.Price;
-            movieVM.ReleaseDate = movie.ReleaseDate;
-            movieVM.Title = movie.Title;
-            return View(movieVM);
+            }
         }
         
         [HttpGet("Delete")]
         public IActionResult Delete(int? id)
         {
-            if (id == null)
-                return NotFound();
-            MovieViewModel movieVM = new MovieViewModel();
-            var movieM = UnitOfWork.MovieRepository.Get(id.Value);
-            if (movieM == null)
-                return NotFound();
-            movieVM.Id = movieM.Id;
-            movieVM.Genre = movieM.Genre;
-            movieVM.Price = movieM.Price;
-            movieVM.ReleaseDate = movieM.ReleaseDate;
-            movieVM.Title = movieM.Title;
-            return View(movieVM);
+            try
+            {
+                if (id == null)
+                    throw new NullReferenceException();
+                MovieViewModel movieVM = new MovieViewModel();
+                var movieM = UnitOfWork.MovieRepository.Get(id.Value);
+                if (movieM == null)
+                    throw new NullReferenceException();
+                movieVM.Id = movieM.Id;
+                movieVM.Genre = movieM.Genre;
+                movieVM.Price = movieM.Price;
+                movieVM.ReleaseDate = movieM.ReleaseDate;
+                movieVM.Title = movieM.Title;
+                return View(movieVM);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }            
         }
 
         [HttpPost("Delete")]
