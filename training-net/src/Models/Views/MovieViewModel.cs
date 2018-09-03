@@ -5,7 +5,7 @@ namespace training_net.Models.Views
 {
   public class MovieViewModel 
     {
-        public int Id { get; set; }//
+        public int Id { get; set; }
         public string Title { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ReleaseDate { get; set; }

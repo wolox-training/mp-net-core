@@ -21,4 +21,12 @@
     "SaveButton": "Guardar",
     "SaveChangesButton": "Guardar cambios",
     "Title": "Título",
+    "UserRegistration": "Registro de usuario",
+    "UserName": "Nombre de usuario",
+    "EmailAddress": "Dirección de Email",
+    "Password": "Contraseña",
+    "ConfirmPassword": "Repetir contraseña",
+    "Register": "Registrar",
+    "Login": "Iniciar sesión",
+    "RememberMe": "Recuérdame",
 }

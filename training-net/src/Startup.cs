@@ -30,13 +30,21 @@ namespace training_net
             services.AddJsonLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc().AddViewLocalization();
             services.AddDbContext<DataBaseContext>(options =>  options.UseNpgsql(Configuration["ConnectionString"]));
-            services.AddIdentity<User, IdentityRole>(options => 
+            services.AddIdentity<User, IdentityRole>()
+                   .AddEntityFrameworkStores<DataBaseContext>()
+                   .AddDefaultTokenProviders();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.ConfigureApplicationCookie(options =>
             {
-                options.Cookies.ApplicationCookie.LoginPath = "/Account/Login";
-                options.Cookies.ApplicationCookie.AccessDeniedPath = "/Account/AccessDenied";
-            })
-                .AddEntityFrameworkStores<DataBaseContext>()
-                .AddDefaultTokenProviders();            
+                options.LoginPath = "/Account/Login";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+            });
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+               // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+               options.CheckConsentNeeded = context => true;
+               options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
             services.AddScoped<DataBaseContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.Configure<CookiePolicyOptions>(options =>

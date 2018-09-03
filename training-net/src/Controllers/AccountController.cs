@@ -1,12 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using training_net.Repositories.Database;
-using training_net.Repositories;
-using Microsoft.EntityFrameworkCore;
 using training_net.Models.Views;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Threading.Tasks;
-using System.Linq;
 using training_net.Models;
 
 namespace training_net.Controllers
@@ -36,7 +31,8 @@ namespace training_net.Controllers
                 if(result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, true);
-                    return RedirectToAction("Users", "UserManagement");
+                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Users", "UserManagement");
                 }
                 else foreach (var error in result.Errors) ModelState.AddModelError("", error.Description);
             }
@@ -52,10 +48,17 @@ namespace training_net.Controllers
             if(ModelState.IsValid)
             {
                 var result = await SignInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.RememberMe, false);
-                if(result.Succeeded) return RedirectToAction("Users", "UserManagement");
+                if(result.Succeeded) return RedirectToAction("Index", "Home");
                 ModelState.AddModelError("", "Invalid login attempt.");
             }
             return View(loginViewModel);
+        }
+
+        [HttpPost("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await SignInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet("AccessDenied")]

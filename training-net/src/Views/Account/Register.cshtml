@@ -1,33 +1,35 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @using training_net.Models.Views
 @model UserViewModel
-@{
-    ViewData["Title"] = "User registration";
-}
- <h3>User registration</h3>
+
+<h3>@Localizer["UserRegistration"]</h3>
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
-    <div asp-validation-summary="All"></div>
-    <div class='form-group'>
-        @Html.LabelFor(model => model.UserName)
-        @Html.EditorFor(model => model.UserName)
-        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger"})
-    </div>
-    <div class='form-group'>
-        @Html.LabelFor(model => model.Email)
-        @Html.EditorFor(model => model.Email)
-        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger"})
-    </div>
-    <div class='form-group'>
-        @Html.LabelFor(model => model.Password)
-        @Html.EditorFor(model => model.Password)
-        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger"})
-    </div>
-    <div class='form-group'>
-        @Html.LabelFor(model => model.ConfirmPassword)
-        @Html.EditorFor(model => model.ConfirmPassword)
-        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger"})
+    <div class="form-horizontal">
+        <div asp-validation-summary="All"></div>
+        <div class='form-group'>
+            <label>@Localizer["UserName"]</label>
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger"})
+        </div>
+        <div class='form-group'>
+            <label>@Localizer["EmailAddress"]</label>
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger"})
+        </div>
+        <div class='form-group'>
+            <label>@Localizer["Password"]</label>
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger"})
+        </div>
+        <div class='form-group'>
+            <label>@Localizer["ConfirmPassword"]</label>
+            @Html.EditorFor(model => model.ConfirmPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger"})
+        </div>
     </div>
     <div>
-        <input type="submit" value="Register"/>
+        <input type="submit" value="@Localizer["Register"]" />
     </div>
 }

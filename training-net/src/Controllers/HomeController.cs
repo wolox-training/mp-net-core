@@ -13,7 +13,6 @@ namespace training_net.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize]
         [HttpGet("")]
         public IActionResult Index()
         {

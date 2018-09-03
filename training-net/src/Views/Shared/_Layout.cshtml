@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
-@using System.Globalization;
+@using System.Globalization
 
 @inject IViewLocalizer Localizer
 
@@ -40,7 +40,8 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                     <li><a asp-area="" asp-controller="HelloWorld" asp-action="Index">@Localizer["HelloWorldButton"]</a></li>
                     <li><a asp-area="" asp-controller="Movie" asp-action="Index">@Localizer["MovieControllerTitle"]</a></li>
-                </ul>
+                    </ul>
+                    @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
     </nav>

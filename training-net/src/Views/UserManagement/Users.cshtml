@@ -1,0 +1,23 @@
+@using training_net.Repositories.Database
+@using Microsoft.AspNetCore.Identity
+@model training_net.Models.Views.UserManagementViewModel
+
+<h3>Users</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Roles</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => user.UserName)</td>
+                <td>@Html.DisplayFor(model => user.Email)</td>
+            </tr>
+        }
+    </tbody>
+</table>
