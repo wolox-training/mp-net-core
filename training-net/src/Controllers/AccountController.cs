@@ -31,7 +31,8 @@ namespace training_net.Controllers
                 if(result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, true);
-                    return RedirectToAction("Users", "UserManagement");
+                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Users", "UserManagement");
                 }
                 else foreach (var error in result.Errors) ModelState.AddModelError("", error.Description);
             }
@@ -47,7 +48,7 @@ namespace training_net.Controllers
             if(ModelState.IsValid)
             {
                 var result = await SignInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.RememberMe, false);
-                if(result.Succeeded) return RedirectToAction("Users", "UserManagement");
+                if(result.Succeeded) return RedirectToAction("Index", "Home");
                 ModelState.AddModelError("", "Invalid login attempt.");
             }
             return View(loginViewModel);
