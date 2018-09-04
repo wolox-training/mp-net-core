@@ -1,6 +1,8 @@
 {
     "BackToList": "Back to list",
     "Delete": "Delete",    
+    "Details": "Details",
+    "Edit": "Edit",
     "Genre": "Genre",
     "HelloWorldButton": "Hello World!",
     "HelloWorldParagraph": "...and this paragraph too...",

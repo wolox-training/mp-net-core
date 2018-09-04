@@ -1,6 +1,8 @@
 {
     "BackToList": "Regresar a la lista",
     "Delete": "Borrar",
+    "Details": "Detalles",
+    "Edit": "Editar",
     "Genre": "Género",
     "HelloWorldButton": "Hola Mundo!",
     "HelloWorldParagraph": "...y este párrafo también...",
