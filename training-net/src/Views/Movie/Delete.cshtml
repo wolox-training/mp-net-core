@@ -1,0 +1,18 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model training_net.Models.Views.MovieViewModel
+
+@{ViewData["DetailsDeleteTitle"] = Localizer["Delete"].Value;}
+<partial name="~/Views/Shared/_Details.cshtml" view-data="ViewData"  />
+<div>
+    @using (Html.BeginForm("Delete", "Movie", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.Id)
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" />
+        |
+        @Html.ActionLink(Localizer["BackToList"].Value, "Index")
+        </div>
+    }
+</div>

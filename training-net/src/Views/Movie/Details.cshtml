@@ -1,0 +1,9 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model training_net.Models.Views.MovieViewModel
+
+@{ViewData["DetailsDeleteTitle"] = Localizer["MovieDetailsTitle"].Value;}
+<partial name="~/Views/Shared/_Details.cshtml" view-data="ViewData"  />
+<div>
+<a asp-action="Index">@Localizer["BackToList"].Value</a>
+</div>

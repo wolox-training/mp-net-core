@@ -41,8 +41,8 @@ namespace training_net.Controllers
             try
             {
                 ModelState.Remove("Id");
-                if (!ModelState.IsValid) 
-                    return RedirectToAction("Create","Movie");
+                if (!ModelState.IsValid)
+                    return RedirectToAction("Create", "Movie");
                 UnitOfWork.MovieRepository.Add(new Movie
                 {
                     Title = movieVM.Title,
@@ -88,7 +88,7 @@ namespace training_net.Controllers
         public IActionResult Edit(int id, [FromForm] MovieViewModel movieVM)
         {
             try
-            {                
+            {
                 if (!ModelState.IsValid)
                 {
                     return RedirectToAction("Edit", "Movie", new { ID = id });
@@ -101,12 +101,70 @@ namespace training_net.Controllers
                 movieM.Title = movieVM.Title;
                 UnitOfWork.MovieRepository.Update(movieM);
                 UnitOfWork.Complete();
-                return RedirectToAction("Index", "Movie");    
+                return RedirectToAction("Index", "Movie");
             }
             catch (DbUpdateConcurrencyException)
             {
                 throw;
             }
+        }
+
+        [HttpGet("Details")]
+        public IActionResult Details(int? id)
+        {
+            try
+            {
+                if (id == null)
+                    throw new NullReferenceException();
+                MovieViewModel movieVM = new MovieViewModel();
+                var movie = UnitOfWork.MovieRepository.Get(id.Value);
+                if (movie == null)
+                    return NotFound();
+                movieVM.Id = movie.Id;
+                movieVM.Genre = movie.Genre;
+                movieVM.Price = movie.Price;
+                movieVM.ReleaseDate = movie.ReleaseDate;
+                movieVM.Title = movie.Title;
+                return View(movieVM);
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+        }
+        
+        [HttpGet("Delete")]
+        public IActionResult Delete(int? id)
+        {
+            try
+            {
+                if (id == null)
+                    throw new NullReferenceException();
+                MovieViewModel movieVM = new MovieViewModel();
+                var movieM = UnitOfWork.MovieRepository.Get(id.Value);
+                if (movieM == null)
+                    throw new NullReferenceException();
+                movieVM.Id = movieM.Id;
+                movieVM.Genre = movieM.Genre;
+                movieVM.Price = movieM.Price;
+                movieVM.ReleaseDate = movieM.ReleaseDate;
+                movieVM.Title = movieM.Title;
+                return View(movieVM);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }            
+        }
+
+        [HttpPost("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed([FromForm] int? id)
+        {
+            var movieM = UnitOfWork.MovieRepository.Get(id.Value);
+            UnitOfWork.MovieRepository.Remove(movieM);
+            UnitOfWork.Complete();
+            return RedirectToAction("Index", "Movie");
         }
     }
 }

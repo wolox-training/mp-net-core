@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 using training_net.Repositories.Database;
 using training_net.Repositories.Interfaces;
 
@@ -36,6 +37,10 @@ namespace training_net
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             CultureInfo.CurrentUICulture = new CultureInfo(Configuration["DefaultLang"]);
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Training NET API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +61,11 @@ namespace training_net
             app.UseCookiePolicy();
 
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Training NET API V1");
+            });
         }
     }
 }
