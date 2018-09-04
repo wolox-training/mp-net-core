@@ -41,6 +41,7 @@ namespace training_net.Controllers
                 ReleaseDate = movie.ReleaseDate,
                 Genre = movie.Genre,
                 Price = movie.Price,
+                Rating = movie.Rating
             }
             ).ToList();               
             return View(moviesAndGenresVM);
@@ -63,7 +64,8 @@ namespace training_net.Controllers
                     Title = movieVM.Title,
                     ReleaseDate = movieVM.ReleaseDate,
                     Genre = movieVM.Genre,
-                    Price = movieVM.Price
+                    Price = movieVM.Price,
+                    Rating = movieVM.Rating
                 });
                 UnitOfWork.Complete();
                 return RedirectToAction("Index", "Movie");
@@ -90,6 +92,7 @@ namespace training_net.Controllers
                 movieVM.Price = movie.Price;
                 movieVM.ReleaseDate = movie.ReleaseDate;
                 movieVM.Title = movie.Title;
+                movieVM.Rating = movie.Rating;
                 return View(movieVM);
             }
             catch (NullReferenceException)
@@ -114,6 +117,7 @@ namespace training_net.Controllers
                 movieM.Price = movieVM.Price;
                 movieM.ReleaseDate = movieVM.ReleaseDate;
                 movieM.Title = movieVM.Title;
+                movieM.Rating = movieVM.Rating;
                 UnitOfWork.MovieRepository.Update(movieM);
                 UnitOfWork.Complete();
                 return RedirectToAction("Index", "Movie");
@@ -140,6 +144,7 @@ namespace training_net.Controllers
                 movieVM.Price = movie.Price;
                 movieVM.ReleaseDate = movie.ReleaseDate;
                 movieVM.Title = movie.Title;
+                movieVM.Rating = movie.Rating;
                 return View(movieVM);
             }
             catch (NullReferenceException)
@@ -164,6 +169,7 @@ namespace training_net.Controllers
                 movieVM.Price = movieM.Price;
                 movieVM.ReleaseDate = movieM.ReleaseDate;
                 movieVM.Title = movieM.Title;
+                movieVM.Rating = movieM.Rating;
                 return View(movieVM);
             }
             catch (DbUpdateConcurrencyException)
