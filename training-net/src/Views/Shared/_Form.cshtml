@@ -38,6 +38,13 @@
             </div>
         </div>
         <div class="form-group">
+            <label  asp-for="Rating" class="control-label col-md-2">@Localizer["Rating"]</label>
+            <div class="col-md-10">
+                <input asp-for="Rating" class="form-control" type="text" id="Rating" name="Rating"/>
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="@ViewData["btnText"]" class="btn btn-default" />
             </div>

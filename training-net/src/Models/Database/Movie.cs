@@ -12,5 +12,6 @@ namespace training_net.Models
         public DateTime ReleaseDate { get; set; }
         public string Genre { get; set; }
         public float Price { get; set; }
+        public string Rating { get; set; }
     }
 }
