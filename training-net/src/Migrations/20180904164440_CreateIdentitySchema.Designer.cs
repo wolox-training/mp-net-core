@@ -10,7 +10,7 @@ using training_net.Repositories.Database;
 namespace training_net.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20180903183134_CreateIdentitySchema")]
+    [Migration("20180904164440_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
