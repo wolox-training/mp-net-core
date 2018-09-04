@@ -22,7 +22,16 @@ namespace training_net.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult Index() => View(UnitOfWork.MovieRepository.GetAll().Select(
+        public IActionResult Index(string searchString)
+        {
+            var movies = from m in UnitOfWork.MovieRepository.GetAll()
+                 select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                movies = movies.Where(s => s.Title.Contains(searchString));
+            }
+            return View(movies.Select(
             movie => new MovieViewModel
             {
                 Id = movie.Id,
@@ -31,7 +40,8 @@ namespace training_net.Controllers
                 Genre = movie.Genre,
                 Price = movie.Price
             }
-        ).ToList());
+            ).ToList());
+        }
 
         [HttpGet("Create")]
         public IActionResult Create() => View();
