@@ -1,14 +1,16 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @using training_net.Repositories.Database
 @using Microsoft.AspNetCore.Identity
 @model training_net.Models.Views.UserManagementViewModel
 
-<h3>Users</h3>
-<table>
+<h3>@Localizer["Users"]</h3>
+<p>@Localizer["UsersManagementMsg"]</p>
+<table class="table">
     <thead>
         <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Roles</th>
+            <th>@Localizer["UserName"]</th>
+            <th>@Localizer["Email"]</th>
         </tr>
     </thead>
     <tbody>
