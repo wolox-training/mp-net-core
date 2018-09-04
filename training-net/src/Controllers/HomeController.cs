@@ -18,13 +18,15 @@ namespace training_net.Controllers
         {
             return View();
         }
-
+        
+        [HttpGet("About")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
             return View();
         }
 
+        [HttpGet("Contact")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
