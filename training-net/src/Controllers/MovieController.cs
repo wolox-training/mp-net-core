@@ -57,8 +57,8 @@ namespace training_net.Controllers
             try
             {
                 ModelState.Remove("Id");
-                if (!ModelState.IsValid)
-                    return RedirectToAction("Create", "Movie");
+                if (ModelState.IsValid)
+                    {
                 UnitOfWork.MovieRepository.Add(new Movie
                 {
                     Title = movieVM.Title,
@@ -68,7 +68,8 @@ namespace training_net.Controllers
                     Rating = movieVM.Rating
                 });
                 UnitOfWork.Complete();
-                return RedirectToAction("Index", "Movie");
+                return RedirectToAction("Index", "Movie");}
+                return View(movieVM);
             }
             catch (DbUpdateConcurrencyException)
             {
