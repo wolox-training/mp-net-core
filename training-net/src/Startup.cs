@@ -15,7 +15,7 @@ using training_net.Repositories.Interfaces;
 
 namespace training_net
 {
-  public class Startup
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -85,6 +85,7 @@ namespace training_net
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Training NET API V1");
             });
+            Mailer.SetAccountConfiguration(Configuration);
         }
     }
 }

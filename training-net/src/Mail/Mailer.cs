@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace NetCoreBootstrap.Mail
+namespace training_net.Mail
 {
     public static class Mailer
     {
