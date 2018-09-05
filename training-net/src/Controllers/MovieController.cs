@@ -6,6 +6,7 @@ using training_net.Models.Views;
 using training_net.Repositories.Interfaces;
 using training_net.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace training_net.Controllers
 {
@@ -22,21 +23,27 @@ namespace training_net.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult Index(string searchString)
+        public IActionResult Index(string movieGenre, string searchString)
         {
+            var genreQuery = UnitOfWork.MovieRepository.GetAll().OrderBy( m => m.Genre).Select( m => m.Genre).Distinct().ToList();
             var movies = UnitOfWork.MovieRepository.GetAll();
             if (!String.IsNullOrEmpty(searchString))
-                movies = UnitOfWork.MovieRepository.Find( m => m.Title.ToLower().Contains(searchString.ToLower()));
-            return View(movies.Select(
+                movies = movies.Where( m => m.Title.ToLower().Contains(searchString.ToLower()));
+            if(!String.IsNullOrEmpty(movieGenre))
+                movies = movies.Where( m => m.Genre == movieGenre);
+            var moviesAndGenresVM = new MoviesAndGenresViewModel();
+            moviesAndGenresVM.GenreList = new SelectList(genreQuery);
+            moviesAndGenresVM.MovieList = movies.Select(
             movie => new MovieViewModel
             {
                 Id = movie.Id,
                 Title = movie.Title,
                 ReleaseDate = movie.ReleaseDate,
                 Genre = movie.Genre,
-                Price = movie.Price
+                Price = movie.Price,
             }
-            ).ToList());
+            ).ToList();               
+            return View(moviesAndGenresVM);
         }
 
         [HttpGet("Create")]
