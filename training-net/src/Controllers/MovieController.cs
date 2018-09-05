@@ -231,7 +231,7 @@ namespace training_net.Controllers
                                     $"Price: {movie.Price}{Environment.NewLine}"+
                                     $"Rating: {movie.Rating}{Environment.NewLine}";
                 Mailer.Send(EmailAddress, "subject", bodyMsg);
-                return RedirectToAction("SendConfirmation", "Movie");
+                return RedirectToAction("Index", "Movie");
             }
             catch (NullReferenceException)
             {
