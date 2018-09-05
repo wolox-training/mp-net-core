@@ -189,5 +189,54 @@ namespace training_net.Controllers
             UnitOfWork.Complete();
             return RedirectToAction("Index", "Movie");
         }
+
+        [HttpGet("SendMovieInfo")]
+        public IActionResult SendMovieInfo(int? id)
+        {
+            try
+            {
+                if (id == null)
+                    throw new NullReferenceException();
+                MovieViewModel movieVM = new MovieViewModel();
+                var movie = UnitOfWork.MovieRepository.Get(id.Value);
+                if (movie == null)
+                    return NotFound();
+                movieVM.Id = movie.Id;
+                movieVM.Genre = movie.Genre;
+                movieVM.Price = movie.Price;
+                movieVM.ReleaseDate = movie.ReleaseDate;
+                movieVM.Title = movie.Title;
+                movieVM.Rating = movie.Rating;
+                return View(movieVM);
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost("SendMovieInfo")]
+        public IActionResult SendMovieInfo([FromForm] string EmailAddress, int? id)
+        {
+            try
+            {
+                if (id == null)
+                    throw new NullReferenceException();
+                var movie = UnitOfWork.MovieRepository.Get(id.Value);
+                if (movie == null)
+                    return NotFound();
+                string bodyMsg =    $"Title: {movie.Title}{Environment.NewLine}"+
+                                    $"Genre: {movie.Genre}{Environment.NewLine}"+
+                                    $"Release date: {movie.ReleaseDate.ToShortDateString()}{Environment.NewLine}"+
+                                    $"Price: {movie.Price}{Environment.NewLine}"+
+                                    $"Rating: {movie.Rating}{Environment.NewLine}";
+                Mailer.Send(EmailAddress, "subject", bodyMsg);
+                return RedirectToAction("SendConfirmation", "Movie");
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+        }
     }
 }
