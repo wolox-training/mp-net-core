@@ -24,13 +24,9 @@ namespace training_net.Controllers
         [HttpGet("")]
         public IActionResult Index(string searchString)
         {
-            var movies = from m in UnitOfWork.MovieRepository.GetAll()
-                 select m;
-
+            var movies = UnitOfWork.MovieRepository.GetAll();
             if (!String.IsNullOrEmpty(searchString))
-            {
-                movies = movies.Where(s => s.Title.Contains(searchString));
-            }
+                movies = UnitOfWork.MovieRepository.Find( m => m.Title.ToLower().Contains(searchString.ToLower()));
             return View(movies.Select(
             movie => new MovieViewModel
             {
