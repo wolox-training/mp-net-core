@@ -24,13 +24,22 @@ namespace training_net.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult Index(string movieGenre, string searchString, string sortOrder)
+        public IActionResult Index(string movieGenre, string searchString, string sortOrder, string currentFilter, int? page)
         {
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             ViewData["GenreSortParm"] = sortOrder == "genre" ? "genre_desc" : "genre";
             ViewData["DateSortParm"] = sortOrder == "date" ? "date_desc" : "date";  
             ViewData["PriceSortParm"] = sortOrder == "price" ? "price_desc" : "price";
+<<<<<<< b4bd3d2c2e2b0d970ff21e63bf4943c15c47947d
             ViewData["RatingSortParm"] = sortOrder == "rating" ? "rating_desc" : "rating";
+=======
+            if (searchString != null)
+               page = 1;
+            else
+                searchString = currentFilter;
+            ViewData["CurrentFilter"] = searchString;     
+>>>>>>> Paging in process
             var movies = UnitOfWork.MovieRepository.GetAll();
             var genreQuery = movies.OrderBy(m => m.Genre).Select(m => m.Genre).Distinct().ToList();
             if (!String.IsNullOrEmpty(searchString))
@@ -86,7 +95,8 @@ namespace training_net.Controllers
                         moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderBy(m => m.Title).ToList();
                         break;
                 }
-            return View(moviesAndGenresVM);
+            int pageSize = 3;
+            return View(PaginatedList<MoviesAndGenresViewModel>.CreateAsync(,page ?? 1, pageSize ));
         }
 
         [HttpGet("Create")]
