@@ -12,14 +12,14 @@ namespace training_net.Models.Views
         [StringLength(60, MinimumLength = 3), Required]
         public string Title { get; set; }
 
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Required, DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ReleaseDate { get; set; }
         
         [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$"), Required, StringLength(30)]
         public string Genre { get; set; }
 
-        [Range(1, 100), DataType(DataType.Currency)]
-        public float Price { get; set; }
+        [Required(ErrorMessage="The Price field is required."), Range(0, 100), DataType(DataType.Currency)]
+        public float? Price { get; set; }
 
         [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(5), Required]
         public string Rating { get; set; }
