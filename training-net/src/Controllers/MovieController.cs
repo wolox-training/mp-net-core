@@ -25,12 +25,12 @@ namespace training_net.Controllers
         [HttpGet("")]
         public IActionResult Index(string movieGenre, string searchString)
         {
-            var genreQuery = UnitOfWork.MovieRepository.GetAll().OrderBy( m => m.Genre).Select( m => m.Genre).Distinct().ToList();
             var movies = UnitOfWork.MovieRepository.GetAll();
+            var genreQuery = movies.OrderBy(m => m.Genre).Select(m => m.Genre).Distinct().ToList();
             if (!String.IsNullOrEmpty(searchString))
-                movies = movies.Where( m => m.Title.ToLower().Contains(searchString.ToLower()));
+                movies = movies.Where(m => m.Title.ToLower().Contains(searchString.ToLower()));
             if(!String.IsNullOrEmpty(movieGenre))
-                movies = movies.Where( m => m.Genre == movieGenre);
+                movies = movies.Where(m => m.Genre == movieGenre);
             var moviesAndGenresVM = new MoviesAndGenresViewModel();
             moviesAndGenresVM.GenreList = new SelectList(genreQuery);
             moviesAndGenresVM.MovieList = movies.Select(
