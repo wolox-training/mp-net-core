@@ -23,13 +23,13 @@
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParm"]">@Localizer["Title"]</a>
             </th>
             <th>
-                @Localizer["Genre"]
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GenreSortParm"]">@Localizer["Genre"]</a>
             </th>
             <th>
-                @Localizer["Price"]
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Localizer["Price"]</a>
             </th>
             <th>
-                @Localizer["ReleaseDate"]
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Localizer["ReleaseDate"]</a>
             </th>
             <th>
                 @Localizer["Rating"]
