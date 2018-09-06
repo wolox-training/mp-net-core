@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using training_net.Models;
 using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace training_net.Controllers
 {
@@ -17,13 +18,15 @@ namespace training_net.Controllers
         {
             return View();
         }
-
+        
+        [HttpGet("About")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
             return View();
         }
 
+        [HttpGet("Contact")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
