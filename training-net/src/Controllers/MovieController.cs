@@ -57,18 +57,20 @@ namespace training_net.Controllers
             try
             {
                 ModelState.Remove("Id");
-                if (!ModelState.IsValid)
-                    return RedirectToAction("Create", "Movie");
-                UnitOfWork.MovieRepository.Add(new Movie
+                if (ModelState.IsValid)
                 {
-                    Title = movieVM.Title,
-                    ReleaseDate = movieVM.ReleaseDate,
-                    Genre = movieVM.Genre,
-                    Price = movieVM.Price,
-                    Rating = movieVM.Rating
-                });
-                UnitOfWork.Complete();
-                return RedirectToAction("Index", "Movie");
+                    UnitOfWork.MovieRepository.Add(new Movie
+                    {
+                        Title = movieVM.Title,
+                        ReleaseDate = movieVM.ReleaseDate,
+                        Genre = movieVM.Genre,
+                        Price = movieVM.Price,
+                        Rating = movieVM.Rating
+                    });
+                    UnitOfWork.Complete();
+                    return RedirectToAction("Index", "Movie");
+                }
+                return View(movieVM);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -107,20 +109,20 @@ namespace training_net.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
+                if(ModelState.IsValid)
                 {
-                    return RedirectToAction("Edit", "Movie", new { ID = id });
+                    var movieM = UnitOfWork.MovieRepository.Get(id);
+                    movieM.Id = id;
+                    movieM.Genre = movieVM.Genre;
+                    movieM.Price = movieVM.Price;
+                    movieM.ReleaseDate = movieVM.ReleaseDate;
+                    movieM.Title = movieVM.Title;
+                    movieM.Rating = movieVM.Rating;
+                    UnitOfWork.MovieRepository.Update(movieM);
+                    UnitOfWork.Complete();
+                    return RedirectToAction("Index", "Movie");
                 }
-                var movieM = UnitOfWork.MovieRepository.Get(id);
-                movieM.Id = id;
-                movieM.Genre = movieVM.Genre;
-                movieM.Price = movieVM.Price;
-                movieM.ReleaseDate = movieVM.ReleaseDate;
-                movieM.Title = movieVM.Title;
-                movieM.Rating = movieVM.Rating;
-                UnitOfWork.MovieRepository.Update(movieM);
-                UnitOfWork.Complete();
-                return RedirectToAction("Index", "Movie");
+                return View(movieVM);
             }
             catch (DbUpdateConcurrencyException)
             {
