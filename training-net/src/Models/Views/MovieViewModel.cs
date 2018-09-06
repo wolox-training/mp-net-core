@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-<<<<<<< 86bdffc292f7ac9113e36d107bcc7b5ceb67c8ef
 using Microsoft.AspNetCore.Mvc.Rendering;
-=======
-using System.ComponentModel.DataAnnotations.Schema;
->>>>>>> Validation added in models
 
 namespace training_net.Models.Views
 {
