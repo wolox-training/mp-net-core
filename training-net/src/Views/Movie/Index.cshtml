@@ -20,7 +20,7 @@
     <thead>
         <tr>
             <th>
-                @Localizer["Title"]
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParm"]">@Localizer["Title"]</a>
             </th>
             <th>
                 @Localizer["Genre"]

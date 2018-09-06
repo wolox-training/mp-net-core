@@ -24,8 +24,9 @@ namespace training_net.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult Index(string movieGenre, string searchString)
+        public IActionResult Index(string movieGenre, string searchString, string sortOrder)
         {
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             var movies = UnitOfWork.MovieRepository.GetAll();
             var genreQuery = movies.OrderBy(m => m.Genre).Select(m => m.Genre).Distinct().ToList();
             if (!String.IsNullOrEmpty(searchString))
@@ -44,7 +45,9 @@ namespace training_net.Controllers
                 Price = movie.Price,
                 Rating = movie.Rating
             }
-            ).ToList();               
+            ).ToList();
+            if(sortOrder == "title_desc")
+                moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderByDescending(m => m.Title).ToList();               
             return View(moviesAndGenresVM);
         }
 
