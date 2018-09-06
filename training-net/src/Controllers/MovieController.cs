@@ -7,6 +7,7 @@ using training_net.Repositories.Interfaces;
 using training_net.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using training_net.Mail;
 
 namespace training_net.Controllers
 {
