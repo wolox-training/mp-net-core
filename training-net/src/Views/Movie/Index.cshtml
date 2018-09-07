@@ -9,10 +9,10 @@
 </div>
 <form asp-controller="Movies" asp-action="Index" method="get">
     <p>
-        <select name="movieGenre" asp-items="Model.GenreList">
+        <select name="movieGenre" asp-items="Model.GenreList" asp-for="SelectedGenre">
             <option value="">All</option>
         </select>
-        @Localizer["Title"]: <input type="text" name="SearchString">
+        @Localizer["Title"]: <input type="text" name="SearchString" asp-for="SearchString" />
         <input type="submit" value="@Localizer["Filter"]" />
     </p>
 </form>
@@ -20,19 +20,19 @@
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParm"]">@Localizer["Title"]</a>
+                <a asp-action="Index" asp-for="SelectedSort" asp-route-movieGenre="@Model.SelectedGenre" asp-route-searchString="@Model.SearchString" asp-route-sortOrder="@ViewData["TitleSortParm"]">@Localizer["Title"]</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["GenreSortParm"]">@Localizer["Genre"]</a>
+                <a asp-action="Index" asp-for="SelectedSort" asp-route-movieGenre="@Model.SelectedGenre" asp-route-searchString="@Model.SearchString" asp-route-sortOrder="@ViewData["GenreSortParm"]">@Localizer["Genre"]</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Localizer["Price"]</a>
+                <a asp-action="Index" asp-for="SelectedSort" asp-route-movieGenre="@Model.SelectedGenre" asp-route-searchString="@Model.SearchString" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Localizer["Price"]</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Localizer["ReleaseDate"]</a>
+                <a asp-action="Index" asp-for="SelectedSort" asp-route-movieGenre="@Model.SelectedGenre" asp-route-searchString="@Model.SearchString" asp-route-sortOrder="@ViewData["DateSortParm"]">@Localizer["ReleaseDate"]</a>
             </th>
             <th>
-                @Localizer["Rating"]
+                <a asp-action="Index" asp-for="SelectedSort" asp-route-movieGenre="@Model.SelectedGenre" asp-route-searchString="@Model.SearchString" asp-route-sortOrder="@ViewData["RatingSortParm"]">@Localizer["Rating"]</a>
             </th>
             <th></th>
         </tr>
