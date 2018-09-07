@@ -96,7 +96,7 @@ namespace training_net.Controllers
                         break;
                 }
             int pageSize = 3;
-            return View(PaginatedList<MoviesAndGenresViewModel>.CreateAsync(,page ?? 1, pageSize ));
+            return View(PaginatedList<MoviesAndGenresViewModel>.Create(moviesAndGenresVM, page ?? 1, pageSize ));
         }
 
         [HttpGet("Create")]
