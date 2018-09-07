@@ -202,13 +202,15 @@ namespace training_net.Controllers
                 var movie = UnitOfWork.MovieRepository.Get(id.Value);
                 if (movie == null)
                     return NotFound();
-                movieVM.Id = movie.Id;
-                movieVM.Genre = movie.Genre;
-                movieVM.Price = movie.Price;
-                movieVM.ReleaseDate = movie.ReleaseDate;
-                movieVM.Title = movie.Title;
-                movieVM.Rating = movie.Rating;
-                return View(movieVM);
+                return View(new MovieViewModel
+                {
+                    Id = movie.Id,
+                    Genre = movie.Genre,
+                    Price = movie.Price,
+                    ReleaseDate = movie.ReleaseDate,
+                    Title = movie.Title,
+                    Rating = movie.Rating
+                });
             }
             catch (NullReferenceException)
             {
@@ -226,12 +228,12 @@ namespace training_net.Controllers
                 var movie = UnitOfWork.MovieRepository.Get(id.Value);
                 if (movie == null)
                     return NotFound();
-                string bodyMsg =    $"Title: {movie.Title}{Environment.NewLine}"+
-                                    $"Genre: {movie.Genre}{Environment.NewLine}"+
-                                    $"Release date: {movie.ReleaseDate.ToShortDateString()}{Environment.NewLine}"+
-                                    $"Price: {movie.Price}{Environment.NewLine}"+
-                                    $"Rating: {movie.Rating}{Environment.NewLine}";
-                Mailer.Send(EmailAddress, "subject", bodyMsg);
+                string bodyMsg =    $@"Title: {movie.Title}{Environment.NewLine}
+                                    Genre: {movie.Genre}{Environment.NewLine}
+                                    Release date: {movie.ReleaseDate.ToShortDateString()}{Environment.NewLine}
+                                    Price: {movie.Price}{Environment.NewLine}
+                                    Rating: {movie.Rating}{Environment.NewLine}";
+                Mailer.Send(EmailAddress, $"[Movie Info] {movie.Title}", bodyMsg);
                 return RedirectToAction("Index", "Movie");
             }
             catch (NullReferenceException)

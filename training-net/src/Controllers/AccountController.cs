@@ -49,10 +49,7 @@ namespace training_net.Controllers
             {
                 var result = await SignInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.RememberMe, false);
                 if(result.Succeeded) 
-                {
-                    Mailer.Send("martin.perez@wolox.com.ar", "Login", "Te logueaste amiguito");
                     return RedirectToAction("Users", "UserManagement");
-                }
                 ModelState.AddModelError("", "Invalid login attempt.");
             }
             return View(loginViewModel);
