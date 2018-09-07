@@ -201,7 +201,7 @@ namespace training_net.Controllers
                 MovieViewModel movieVM = new MovieViewModel();
                 var movie = UnitOfWork.MovieRepository.Get(id.Value);
                 if (movie == null)
-                    return NotFound();
+                    throw new NullReferenceException();
                 return View(new MovieViewModel
                 {
                     Id = movie.Id,
@@ -227,7 +227,7 @@ namespace training_net.Controllers
                     throw new NullReferenceException();
                 var movie = UnitOfWork.MovieRepository.Get(id.Value);
                 if (movie == null)
-                    return NotFound();
+                    throw new NullReferenceException();
                 string bodyMsg =    $@"Title: {movie.Title}{Environment.NewLine}
                                     Genre: {movie.Genre}{Environment.NewLine}
                                     Release date: {movie.ReleaseDate.ToShortDateString()}{Environment.NewLine}
