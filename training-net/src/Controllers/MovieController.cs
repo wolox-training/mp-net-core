@@ -193,11 +193,37 @@ namespace training_net.Controllers
                 movieVM.ReleaseDate = movie.ReleaseDate;
                 movieVM.Title = movie.Title;
                 movieVM.Rating = movie.Rating;
+                movieVM.Comments = movie.Comments;
                 return View(movieVM);
             }
             catch (NullReferenceException)
             {
                 return NotFound();
+            }
+        }
+
+        [HttpPost("Details")]
+        public IActionResult AddComment(int? id,[FromForm] string comment, [FromForm] string currentUser)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var user = User;ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+                    UnitOfWork.CommentRepository.Add(new Comment
+                    {
+                        User = User.FindFirst(ClaimTypes.NameIdentifier),
+                        CommentString = comment,
+                        Movie = UnitOfWork.MovieRepository.Get(id.Value) 
+                    });
+                    UnitOfWork.Complete();
+                    return RedirectToAction("Details", "Movie", id);
+                }
+                return View(id);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
             }
         }
         

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -33,12 +32,6 @@ namespace training_net.Repositories
         public List<User> GetAllUsers()
         {
             return UserManager.Users.ToList();
-        }
-
-        public int GetUserId(ClaimsPrincipal user) 
-        {
-            var userId = UserManager.GetUserId(user);
-            return Convert.ToInt32(userId);
         }
 
         public UserManager<User> UserManager
