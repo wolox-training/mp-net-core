@@ -1,6 +1,7 @@
 @using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.Rendering
 @inject IViewLocalizer Localizer
-@model PaginatedList<training_net.Models.Views.MoviesAndGenresViewModel>
+@model training_net.Models.Views.MoviesAndGenresViewModel
 
 <h2>@Localizer["MovieControllerTitle"]</h2>
 
@@ -9,10 +10,15 @@
 </div>
 <form asp-controller="Movies" asp-action="Index" method="get">
     <p>
-        <select name="movieGenre" asp-items="Model.GenreList" asp-for="SelectedGenre">
+        <select name="movieGenre" asp-items="Model.GenreList" asp-for="CurrentGenre">
             <option value="">All</option>
         </select>
-        @Localizer["Title"]: <input type="text" name="SearchString" asp-for="SearchString" />
+        <select name="pageSize" asp-items="@{new SelectList(Enumerable.Range(1, 10));}" asp-for="CurrentPageSize">
+        </select>
+        @Localizer["Title"]: <input type="text" name="searchString" asp-for="CurrentSearch" />
+        @Html.Hidden("sortOrder", Model.CurrentSort)
+        @Html.Hidden("movieGenre", Model.CurrentGenre)
+        @Html.Hidden("searchString", Model.CurrentSearch)
         <input type="submit" value="@Localizer["Filter"]" />
     </p>
 </form>
@@ -20,19 +26,49 @@
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-for="SelectedSort" asp-route-movieGenre="@Model.SelectedGenre" asp-route-searchString="@Model.SearchString" asp-route-sortOrder="@ViewData["TitleSortParm"]">@Localizer["Title"]</a>
+                <a  asp-action="Index"
+                    asp-for="CurrentSort"
+                    asp-route-pageSize="@Model.CurrentPageSize"
+                    asp-route-movieGenre="@Model.CurrentGenre"
+                    asp-route-searchString="@Model.CurrentSearch"
+                    asp-route-sortOrder="@ViewData["TitleSortParm"]">@Localizer["Title"]
+                </a>
             </th>
             <th>
-                <a asp-action="Index" asp-for="SelectedSort" asp-route-movieGenre="@Model.SelectedGenre" asp-route-searchString="@Model.SearchString" asp-route-sortOrder="@ViewData["GenreSortParm"]">@Localizer["Genre"]</a>
+                <a  asp-action="Index"
+                    asp-for="CurrentSort"
+                    asp-route-pageSize="@Model.CurrentPageSize"
+                    asp-route-movieGenre="@Model.CurrentGenre"
+                    asp-route-searchString="@Model.CurrentSearch"
+                    asp-route-sortOrder="@ViewData["GenreSortParm"]">@Localizer["Genre"]
+                </a>
             </th>
             <th>
-                <a asp-action="Index" asp-for="SelectedSort" asp-route-movieGenre="@Model.SelectedGenre" asp-route-searchString="@Model.SearchString" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Localizer["Price"]</a>
+                <a  asp-action="Index"
+                    asp-for="CurrentSort"
+                    asp-route-pageSize="@Model.CurrentPageSize"
+                    asp-route-movieGenre="@Model.CurrentGenre"
+                    asp-route-searchString="@Model.CurrentSearch"
+                    asp-route-sortOrder="@ViewData["PriceSortParm"]">@Localizer["Price"]
+                </a>
             </th>
             <th>
-                <a asp-action="Index" asp-for="SelectedSort" asp-route-movieGenre="@Model.SelectedGenre" asp-route-searchString="@Model.SearchString" asp-route-sortOrder="@ViewData["DateSortParm"]">@Localizer["ReleaseDate"]</a>
+                <a  asp-action="Index"
+                    asp-for="CurrentSort"
+                    asp-route-pageSize="@Model.CurrentPageSize"
+                    asp-route-movieGenre="@Model.CurrentGenre"
+                    asp-route-searchString="@Model.CurrentSearch"
+                    asp-route-sortOrder="@ViewData["DateSortParm"]">@Localizer["ReleaseDate"]
+                </a>
             </th>
             <th>
-                <a asp-action="Index" asp-for="SelectedSort" asp-route-movieGenre="@Model.SelectedGenre" asp-route-searchString="@Model.SearchString" asp-route-sortOrder="@ViewData["RatingSortParm"]">@Localizer["Rating"]</a>
+                <a  asp-action="Index"
+                    asp-for="CurrentSort"
+                    asp-route-pageSize="@Model.CurrentPageSize"
+                    asp-route-movieGenre="@Model.CurrentGenre"
+                    asp-route-searchString="@Model.CurrentSearch"
+                    asp-route-sortOrder="@ViewData["RatingSortParm"]">@Localizer["Rating"]
+                </a>
             </th>
             <th></th>
         </tr>
@@ -68,21 +104,25 @@
 </table>
 
 @{
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var prevDisabled = !Model.MovieList.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.MovieList.HasNextPage ? "disabled" : "";
 }
 
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-page="@(Model.PageIndex - 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @prevDisabled">
+<a  asp-action="Index"
+    asp-route-pageSize="@Model.CurrentPageSize"
+    asp-route-movieGenre="@Model.CurrentGenre"
+    asp-route-searchString="@Model.CurrentSearch"
+    asp-route-sortOrder="@Model.CurrentSort"
+    asp-route-page="@(Model.MovieList.PageIndex - 1)"
+    class="btn btn-default @prevDisabled">
     Previous
 </a>
 <a asp-action="Index"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-page="@(Model.PageIndex + 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @nextDisabled">
+    asp-route-pageSize="@Model.CurrentPageSize"
+    asp-route-movieGenre="@Model.CurrentGenre"
+    asp-route-searchString="@Model.CurrentSearch"
+    asp-route-sortOrder="@Model.CurrentSort"
+    asp-route-page="@(Model.MovieList.PageIndex + 1)"
+    class="btn btn-default @nextDisabled">
     Next
 </a>
