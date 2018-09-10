@@ -3,6 +3,7 @@ using training_net.Models.Views;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using training_net.Models;
+using training_net.Mail;
 
 namespace training_net.Controllers
 {
@@ -47,7 +48,8 @@ namespace training_net.Controllers
             if(ModelState.IsValid)
             {
                 var result = await SignInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.RememberMe, false);
-                if(result.Succeeded) return RedirectToAction("Users", "UserManagement");
+                if(result.Succeeded) 
+                    return RedirectToAction("Users", "UserManagement");
                 ModelState.AddModelError("", "Invalid login attempt.");
             }
             return View(loginViewModel);

@@ -1,0 +1,15 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model training_net.Models.Views.MovieViewModel
+
+@{ViewData["DetailsDeleteTitle"] = Localizer["SendMovieInfoTitle"].Value;}
+<partial name="~/Views/Shared/_Details.cshtml" view-data="ViewData"  />
+<form asp-controller="Movies" asp-action="Index" method="post">
+    <p>
+        @Localizer["SendTo"]: <input type="text" name="EmailAddress">
+        <input type="submit" value="@Localizer["Send"]" />
+    </p>
+</form>
+<div>
+    <a asp-action="Index">@Localizer["BackToList"].Value</a>
+</div>

@@ -7,6 +7,7 @@ using training_net.Repositories.Interfaces;
 using training_net.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using training_net.Mail;
 
 namespace training_net.Controllers
 {
@@ -188,6 +189,57 @@ namespace training_net.Controllers
             UnitOfWork.MovieRepository.Remove(movieM);
             UnitOfWork.Complete();
             return RedirectToAction("Index", "Movie");
+        }
+
+        [HttpGet("SendMovieInfo")]
+        public IActionResult SendMovieInfo(int? id)
+        {
+            try
+            {
+                if (id == null)
+                    throw new NullReferenceException();
+                MovieViewModel movieVM = new MovieViewModel();
+                var movie = UnitOfWork.MovieRepository.Get(id.Value);
+                if (movie == null)
+                    throw new NullReferenceException();
+                return View(new MovieViewModel
+                {
+                    Id = movie.Id,
+                    Genre = movie.Genre,
+                    Price = movie.Price,
+                    ReleaseDate = movie.ReleaseDate,
+                    Title = movie.Title,
+                    Rating = movie.Rating
+                });
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost("SendMovieInfo")]
+        public IActionResult SendMovieInfo([FromForm] string EmailAddress, int? id)
+        {
+            try
+            {
+                if (id == null)
+                    throw new NullReferenceException();
+                var movie = UnitOfWork.MovieRepository.Get(id.Value);
+                if (movie == null)
+                    throw new NullReferenceException();
+                string bodyMsg =    $@"Title: {movie.Title}{Environment.NewLine}
+                                    Genre: {movie.Genre}{Environment.NewLine}
+                                    Release date: {movie.ReleaseDate.ToShortDateString()}{Environment.NewLine}
+                                    Price: {movie.Price}{Environment.NewLine}
+                                    Rating: {movie.Rating}{Environment.NewLine}";
+                Mailer.Send(EmailAddress, $"[Movie Info] {movie.Title}", bodyMsg);
+                return RedirectToAction("Index", "Movie");
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
         }
     }
 }

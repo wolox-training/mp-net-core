@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace training_net.Models.Views
 {
-  public class MovieViewModel 
+    public class MovieViewModel 
     {
         public int Id { get; set; }
 

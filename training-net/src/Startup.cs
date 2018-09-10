@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,10 +11,11 @@ using Swashbuckle.AspNetCore.Swagger;
 using training_net.Models;
 using training_net.Repositories.Database;
 using training_net.Repositories.Interfaces;
+using training_net.Mail;
 
 namespace training_net
 {
-  public class Startup
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -85,6 +85,7 @@ namespace training_net
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Training NET API V1");
             });
+            Mailer.SetAccountConfiguration(Configuration);
         }
     }
 }
