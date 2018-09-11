@@ -24,8 +24,13 @@ namespace training_net.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult Index(string movieGenre, string searchString)
+        public IActionResult Index(string movieGenre, string searchString, string sortOrder)
         {
+            ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewData["GenreSortParm"] = sortOrder == "genre" ? "genre_desc" : "genre";
+            ViewData["DateSortParm"] = sortOrder == "date" ? "date_desc" : "date";  
+            ViewData["PriceSortParm"] = sortOrder == "price" ? "price_desc" : "price";
+            ViewData["RatingSortParm"] = sortOrder == "rating" ? "rating_desc" : "rating";
             var movies = UnitOfWork.MovieRepository.GetAll();
             var genreQuery = movies.OrderBy(m => m.Genre).Select(m => m.Genre).Distinct().ToList();
             if (!String.IsNullOrEmpty(searchString))
@@ -33,6 +38,9 @@ namespace training_net.Controllers
             if(!String.IsNullOrEmpty(movieGenre))
                 movies = movies.Where(m => m.Genre == movieGenre);
             var moviesAndGenresVM = new MoviesAndGenresViewModel();
+            moviesAndGenresVM.SearchString = searchString;
+            moviesAndGenresVM.SelectedGenre = movieGenre;
+            moviesAndGenresVM.SelectedSort = sortOrder;
             moviesAndGenresVM.GenreList = new SelectList(genreQuery);
             moviesAndGenresVM.MovieList = movies.Select(
             movie => new MovieViewModel
@@ -44,7 +52,40 @@ namespace training_net.Controllers
                 Price = movie.Price,
                 Rating = movie.Rating
             }
-            ).ToList();               
+            ).ToList();           
+            switch (sortOrder)
+                {
+                    case "rating_desc":
+                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderByDescending(m => m.Rating).ToList();
+                        break;
+                    case "rating":
+                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderBy(m => m.Rating).ToList();
+                        break;
+                    case "price_desc":
+                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderByDescending(m => m.Price).ToList();
+                        break;
+                    case "price":
+                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderBy(m => m.Price).ToList();
+                        break;
+                    case "date_desc":
+                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderByDescending(m => m.ReleaseDate).ToList();
+                        break;
+                    case "date":
+                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderBy(m => m.ReleaseDate).ToList();
+                        break;
+                    case "title_desc":
+                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderByDescending(m => m.Title).ToList();
+                        break;
+                    case "genre":
+                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderBy(m => m.Genre).ToList();
+                        break;
+                    case "genre_desc":
+                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderByDescending(m => m.Genre).ToList();
+                        break;
+                    default:
+                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderBy(m => m.Title).ToList();
+                        break;
+                }
             return View(moviesAndGenresVM);
         }
 
