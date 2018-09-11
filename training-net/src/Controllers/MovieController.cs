@@ -209,10 +209,9 @@ namespace training_net.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = User;ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
                     UnitOfWork.CommentRepository.Add(new Comment
                     {
-                        User = User.FindFirst(ClaimTypes.NameIdentifier),
+                        User = ,
                         CommentString = comment,
                         Movie = UnitOfWork.MovieRepository.Get(id.Value) 
                     });

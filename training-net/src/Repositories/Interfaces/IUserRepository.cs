@@ -11,7 +11,7 @@ using training_net.Repositories.Database;
 
 namespace training_net.Repositories
 {
-    public class UserRepository
+    public class IUserRepository
     {
         private readonly DbContextOptions<DataBaseContext> _options;
         private readonly UserManager<User> _userManager;
