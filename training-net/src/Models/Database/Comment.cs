@@ -8,7 +8,7 @@ namespace training_net.Models
     {
         public int Id { get; set; }
         public string CommentString { get; set;}
-        public string User { get; set;}
+        public User User { get; set;}
         public Movie Movie { get; set;}
     }
 }
