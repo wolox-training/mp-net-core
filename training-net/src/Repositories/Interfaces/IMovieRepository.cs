@@ -3,7 +3,7 @@ using training_net.Models;
 
 namespace training_net.Repositories.Interfaces
 {
-  public interface IMovieRepository : IRepository<Movie>
+    public interface IMovieRepository : IRepository<Movie>
     {
         IEnumerable<Movie> GetLastestMovies(int rank);
     }

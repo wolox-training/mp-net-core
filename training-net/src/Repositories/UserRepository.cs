@@ -4,15 +4,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using training_net.Models;
 using training_net.Repositories.Database;
+using training_net.Repositories.Interfaces;
 
 namespace training_net.Repositories
 {
-    public class UserRepository
+    public class UserRepository : Repository<User>, IUserRepository
     {
         private readonly DbContextOptions<DataBaseContext> _options;
         private readonly UserManager<User> _userManager;
