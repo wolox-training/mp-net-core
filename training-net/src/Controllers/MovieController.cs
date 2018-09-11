@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using training_net.Mail;
 using training_net.Models;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace training_net.Controllers
 {
@@ -17,11 +18,20 @@ namespace training_net.Controllers
     public class MovieController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public MovieController(IUnitOfWork unitOfWork) => this._unitOfWork = unitOfWork;
-
-        public IUnitOfWork UnitOfWork
+        private readonly UserManager<User> _userManager;
+        public MovieController(IUnitOfWork unitOfWork, UserManager<User> userManager)
+        {
+            this._unitOfWork = unitOfWork;
+            this._userManager = userManager;
+        }
+        private IUnitOfWork UnitOfWork
         {
             get => this._unitOfWork;
+        }
+
+        private UserManager<User> UserManager
+        {
+            get => this._userManager;
         }
 
         [HttpGet("")]
@@ -203,7 +213,7 @@ namespace training_net.Controllers
         }
 
         [HttpPost("Details")]
-        public IActionResult AddComment(int? id,[FromForm] string comment, [FromForm] string currentUser)
+        public IActionResult AddComment(int? id,[FromForm] string comment)
         {
             try
             {
@@ -211,14 +221,14 @@ namespace training_net.Controllers
                 {
                     UnitOfWork.CommentRepository.Add(new Comment
                     {
-                        User = ,
-                        CommentString = comment,
+                        User = UserManager.GetUserAsync(User).Result,
+                        Text = comment,
                         Movie = UnitOfWork.MovieRepository.Get(id.Value) 
                     });
                     UnitOfWork.Complete();
-                    return RedirectToAction("Details", "Movie", id);
+                    return RedirectToAction("Details", "Movie", new { id = id.Value});
                 }
-                return View(id);
+                return View(id.Value);
             }
             catch (DbUpdateConcurrencyException)
             {
