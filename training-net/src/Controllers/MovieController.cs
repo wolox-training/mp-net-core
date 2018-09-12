@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using training_net.Mail;
 using training_net.Models;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace training_net.Controllers
 {
@@ -17,11 +18,22 @@ namespace training_net.Controllers
     public class MovieController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public MovieController(IUnitOfWork unitOfWork) => this._unitOfWork = unitOfWork;
+        private readonly UserManager<User> _userManager;
+        
+        public MovieController(IUnitOfWork unitOfWork, UserManager<User> userManager)
+        {
+            this._unitOfWork = unitOfWork;
+            this._userManager = userManager;
+        }
 
-        public IUnitOfWork UnitOfWork
+        private IUnitOfWork UnitOfWork
         {
             get => this._unitOfWork;
+        }
+
+        private UserManager<User> UserManager
+        {
+            get => this._userManager;
         }
 
         [HttpGet("")]
@@ -184,7 +196,7 @@ namespace training_net.Controllers
                 if (id == null)
                     throw new NullReferenceException();
                 MovieViewModel movieVM = new MovieViewModel();
-                var movie = UnitOfWork.MovieRepository.Get(id.Value);
+                var movie = UnitOfWork.MovieRepository.GetMovieWithComments(id.Value);
                 if (movie == null)
                     return NotFound();
                 movieVM.Id = movie.Id;
@@ -193,11 +205,36 @@ namespace training_net.Controllers
                 movieVM.ReleaseDate = movie.ReleaseDate;
                 movieVM.Title = movie.Title;
                 movieVM.Rating = movie.Rating;
+                movieVM.Comments = movie.Comments;
                 return View(movieVM);
             }
             catch (NullReferenceException)
             {
                 return NotFound();
+            }
+        }
+
+        [HttpPost("Details")]
+        public IActionResult AddComment(int? id,[FromForm] string comment)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    UnitOfWork.CommentRepository.Add(new Comment
+                    {
+                        User = UserManager.GetUserAsync(User).Result,
+                        Text = comment,
+                        Movie = UnitOfWork.MovieRepository.Get(id.Value) 
+                    });
+                    UnitOfWork.Complete();
+                    return RedirectToAction("Details", "Movie", new { id = id.Value});
+                }
+                return View(id.Value);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
             }
         }
         

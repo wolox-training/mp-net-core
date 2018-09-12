@@ -1,9 +1,49 @@
+@using Microsoft.AspNetCore.Identity
+@using training_net.Repositories.Database
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+@inject UserManager<User> UserManager
 @model training_net.Models.Views.MovieViewModel
 
 @{ViewData["DetailsDeleteTitle"] = Localizer["MovieDetailsTitle"].Value;}
 <partial name="~/Views/Shared/_Details.cshtml" view-data="ViewData"  />
+<hr />
+<div>
+    <h4>Add a comment!</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @UserManager.GetUserName(User) says:    
+        </dt>
+        <dd>
+            <form asp-controller="Movies" asp-action="AddComment" method="post">       
+                <input type="hidden" name="currentUser" value="@UserManager.GetUserName(User)" />
+                <textarea name="comment" value="Write your comment here..." rows="5" cols="50"></textarea>
+                <input type="submit" value="@Localizer["Send"]" />
+            </form>
+        </dd>
+    </dl>
+</div>
+@{int commentsQty = Model.Comments.Count();}
+@if( commentsQty > 0 )
+{
+    <hr />
+    <div>
+        <h4>Comments!</h4>
+        <p>There are (@commentsQty) comments</p>
+        @foreach (var item in Model.Comments)
+        {
+            <dl class="dl-horizontal">
+                <td>
+                    @Model.Comments.IndexOf(item) | <strong>@Html.DisplayFor(modelItem => item.User.UserName)</strong> says:
+                </td>
+                <td>
+                    <i>"@Html.DisplayFor(modelItem => item.Text)"</i>
+                </td>
+            </dl>  
+        }
+    </div>
+}
+<hr />
 <div>
 <a asp-action="Index">@Localizer["BackToList"].Value</a>
 </div>
