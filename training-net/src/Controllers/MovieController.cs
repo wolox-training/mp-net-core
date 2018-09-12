@@ -19,11 +19,13 @@ namespace training_net.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<User> _userManager;
+        
         public MovieController(IUnitOfWork unitOfWork, UserManager<User> userManager)
         {
             this._unitOfWork = unitOfWork;
             this._userManager = userManager;
         }
+
         private IUnitOfWork UnitOfWork
         {
             get => this._unitOfWork;
