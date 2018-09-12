@@ -26,8 +26,6 @@ namespace training_net.Controllers
         [HttpGet("")]
         public IActionResult Index(string movieGenre, string searchString, string sortOrder, int? page, int? pageSize)
         {
-            if(!String.IsNullOrEmpty(sortOrder))
-                sortOrder = "title_desc";
             if(!pageSize.HasValue)
                 pageSize = 10;            
             ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
