@@ -42,35 +42,34 @@ namespace training_net.Controllers
             switch (sortOrder)
                 {
                     case "rating_desc":
-                    
                         movies = movies.OrderByDescending(m => m.Rating).ToList();
                         break;
                     case "rating":
-                       movies =movies.OrderBy(m => m.Rating).ToList();
+                        movies =movies.OrderBy(m => m.Rating).ToList();
                         break;
                     case "price_desc":
-                       movies =movies.OrderByDescending(m => m.Price).ToList();
+                        movies =movies.OrderByDescending(m => m.Price).ToList();
                         break;
                     case "price":
-                       movies =movies.OrderBy(m => m.Price).ToList();
+                        movies =movies.OrderBy(m => m.Price).ToList();
                         break;
                     case "date_desc":
-                       movies =movies.OrderByDescending(m => m.ReleaseDate).ToList();
+                        movies =movies.OrderByDescending(m => m.ReleaseDate).ToList();
                         break;
                     case "date":
-                       movies =movies.OrderBy(m => m.ReleaseDate).ToList();
+                        movies =movies.OrderBy(m => m.ReleaseDate).ToList();
                         break;
                     case "title_desc":
-                       movies =movies.OrderByDescending(m => m.Title).ToList();
+                        movies =movies.OrderByDescending(m => m.Title).ToList();
                         break;
                     case "genre":
-                       movies =movies.OrderBy(m => m.Genre).ToList();
+                        movies =movies.OrderBy(m => m.Genre).ToList();
                         break;
                     case "genre_desc":
-                       movies =movies.OrderByDescending(m => m.Genre).ToList();
+                        movies =movies.OrderByDescending(m => m.Genre).ToList();
                         break;
                     default:
-                       movies =movies.OrderBy(m => m.Title).ToList();
+                        movies =movies.OrderBy(m => m.Title).ToList();
                         break;
                 }
             var moviesAndGenresVM = new MoviesAndGenresViewModel();
@@ -88,8 +87,7 @@ namespace training_net.Controllers
                 Genre = movie.Genre,
                 Price = movie.Price,
                 Rating = movie.Rating
-            }
-            ).ToList();
+            }).ToList();
             moviesAndGenresVM.MovieList = PaginatedList<MovieViewModel>.Create(movieList, page ?? 1, pageSize.Value);    
             return View(moviesAndGenresVM);
         }
