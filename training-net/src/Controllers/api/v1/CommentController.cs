@@ -10,7 +10,7 @@ using training_net.Repositories.Interfaces;
 
 namespace training_net.Api.V1.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("/api/v1/[controller]")]
     public class CommentController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -30,6 +30,7 @@ namespace training_net.Api.V1.Controllers
             get => this._userManager;
         }
 
+        [HttpGet("Comments")]
         public IActionResult GetComments(int? id)
         {
             var movie = UnitOfWork.MovieRepository.GetMovieWithComments(id.Value);
@@ -41,18 +42,23 @@ namespace training_net.Api.V1.Controllers
             }));
         }
 
-        public IActionResult AddComment(int? id,[FromForm] string comment)
+        public IActionResult AddComment(int? id,[FromForm] string text)
         {
             try
             {
-                UnitOfWork.CommentRepository.Add(new Comment
-                {
+                Comment comment = new Comment {
                     User = UserManager.GetUserAsync(User).Result,
-                    Text = comment,
+                    Text = text,
                     Movie = UnitOfWork.MovieRepository.Get(id.Value) 
-                });
+                };
+                UnitOfWork.CommentRepository.Add(comment);                
                 UnitOfWork.Complete();
-                return GetComments(id);
+                CommentViewModel commentVM = new CommentViewModel {
+                    UserName = comment.User.UserName,
+                    Id = comment.Id,
+                    
+                }
+                return 
             }
             catch (DbUpdateConcurrencyException)
             {
