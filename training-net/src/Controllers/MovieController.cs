@@ -213,30 +213,6 @@ namespace training_net.Controllers
                 return NotFound();
             }
         }
-
-        [HttpPost("Details")]
-        public IActionResult AddComment(int? id,[FromForm] string comment)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    UnitOfWork.CommentRepository.Add(new Comment
-                    {
-                        User = UserManager.GetUserAsync(User).Result,
-                        Text = comment,
-                        Movie = UnitOfWork.MovieRepository.Get(id.Value) 
-                    });
-                    UnitOfWork.Complete();
-                    return RedirectToAction("Details", "Movie", new { id = id.Value});
-                }
-                return View(id.Value);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
-        }
         
         [HttpGet("Delete")]
         public IActionResult Delete(int? id)
