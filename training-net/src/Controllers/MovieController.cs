@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using training_net.Mail;
 using training_net.Models;
+using System.Security.Claims;
 
 namespace training_net.Controllers
 {
