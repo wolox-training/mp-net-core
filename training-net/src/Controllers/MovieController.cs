@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using training_net.Models.Views;
 using training_net.Repositories.Interfaces;
-using training_net.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using training_net.Mail;
+using training_net.Models;
 
 namespace training_net.Controllers
 {
@@ -24,8 +24,10 @@ namespace training_net.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult Index(string movieGenre, string searchString, string sortOrder)
+        public IActionResult Index(string movieGenre, string searchString, string sortOrder, int? page, int? pageSize)
         {
+            if(!pageSize.HasValue)
+                pageSize = 10;            
             ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             ViewData["GenreSortParm"] = sortOrder == "genre" ? "genre_desc" : "genre";
             ViewData["DateSortParm"] = sortOrder == "date" ? "date_desc" : "date";  
@@ -37,12 +39,46 @@ namespace training_net.Controllers
                 movies = movies.Where(m => m.Title.ToLower().Contains(searchString.ToLower()));
             if(!String.IsNullOrEmpty(movieGenre))
                 movies = movies.Where(m => m.Genre == movieGenre);
+            switch (sortOrder)
+                {
+                    case "rating_desc":
+                        movies = movies.OrderByDescending(m => m.Rating).ToList();
+                        break;
+                    case "rating":
+                        movies =movies.OrderBy(m => m.Rating).ToList();
+                        break;
+                    case "price_desc":
+                        movies =movies.OrderByDescending(m => m.Price).ToList();
+                        break;
+                    case "price":
+                        movies =movies.OrderBy(m => m.Price).ToList();
+                        break;
+                    case "date_desc":
+                        movies =movies.OrderByDescending(m => m.ReleaseDate).ToList();
+                        break;
+                    case "date":
+                        movies =movies.OrderBy(m => m.ReleaseDate).ToList();
+                        break;
+                    case "title_desc":
+                        movies =movies.OrderByDescending(m => m.Title).ToList();
+                        break;
+                    case "genre":
+                        movies =movies.OrderBy(m => m.Genre).ToList();
+                        break;
+                    case "genre_desc":
+                        movies =movies.OrderByDescending(m => m.Genre).ToList();
+                        break;
+                    default:
+                        movies =movies.OrderBy(m => m.Title).ToList();
+                        break;
+                }
             var moviesAndGenresVM = new MoviesAndGenresViewModel();
-            moviesAndGenresVM.SearchString = searchString;
-            moviesAndGenresVM.SelectedGenre = movieGenre;
-            moviesAndGenresVM.SelectedSort = sortOrder;
+            moviesAndGenresVM.CurrentSearch = searchString;
+            moviesAndGenresVM.CurrentGenre = movieGenre;
+            moviesAndGenresVM.CurrentSort = sortOrder;
+            moviesAndGenresVM.CurrentPageSize = pageSize.Value;
             moviesAndGenresVM.GenreList = new SelectList(genreQuery);
-            moviesAndGenresVM.MovieList = movies.Select(
+            var movieList = movies.Select( 
             movie => new MovieViewModel
             {
                 Id = movie.Id,
@@ -51,41 +87,8 @@ namespace training_net.Controllers
                 Genre = movie.Genre,
                 Price = movie.Price,
                 Rating = movie.Rating
-            }
-            ).ToList();           
-            switch (sortOrder)
-                {
-                    case "rating_desc":
-                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderByDescending(m => m.Rating).ToList();
-                        break;
-                    case "rating":
-                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderBy(m => m.Rating).ToList();
-                        break;
-                    case "price_desc":
-                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderByDescending(m => m.Price).ToList();
-                        break;
-                    case "price":
-                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderBy(m => m.Price).ToList();
-                        break;
-                    case "date_desc":
-                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderByDescending(m => m.ReleaseDate).ToList();
-                        break;
-                    case "date":
-                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderBy(m => m.ReleaseDate).ToList();
-                        break;
-                    case "title_desc":
-                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderByDescending(m => m.Title).ToList();
-                        break;
-                    case "genre":
-                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderBy(m => m.Genre).ToList();
-                        break;
-                    case "genre_desc":
-                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderByDescending(m => m.Genre).ToList();
-                        break;
-                    default:
-                        moviesAndGenresVM.MovieList = moviesAndGenresVM.MovieList.OrderBy(m => m.Title).ToList();
-                        break;
-                }
+            }).ToList();
+            moviesAndGenresVM.MovieList = PaginatedList<MovieViewModel>.Create(movieList, page ?? 1, pageSize.Value);    
             return View(moviesAndGenresVM);
         }
 
