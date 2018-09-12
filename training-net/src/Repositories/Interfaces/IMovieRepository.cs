@@ -6,5 +6,6 @@ namespace training_net.Repositories.Interfaces
     public interface IMovieRepository : IRepository<Movie>
     {
         IEnumerable<Movie> GetLastestMovies(int rank);
+        Movie GetMovieWithComments(int id);
     }
 }

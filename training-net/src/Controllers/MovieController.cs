@@ -194,7 +194,7 @@ namespace training_net.Controllers
                 if (id == null)
                     throw new NullReferenceException();
                 MovieViewModel movieVM = new MovieViewModel();
-                var movie = UnitOfWork.MovieRepository.Get(id.Value);
+                var movie = UnitOfWork.MovieRepository.GetMovieWithComments(id.Value);
                 if (movie == null)
                     return NotFound();
                 movieVM.Id = movie.Id;

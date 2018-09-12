@@ -23,10 +23,27 @@
         </dd>
     </dl>
 </div>
-<div>
-    <h4>Comments!</h4>
-    
-</div>
+@{int commentsQty = Model.Comments.Count();}
+@if( commentsQty > 0 )
+{
+    <hr />
+    <div>
+        <h4>Comments!</h4>
+        <p>There are (@commentsQty) comments</p>
+        @foreach (var item in Model.Comments)
+        {
+            <dl class="dl-horizontal">
+                <td>
+                    @Model.Comments.IndexOf(item) | <strong>@Html.DisplayFor(modelItem => item.User.UserName)</strong> says:
+                </td>
+                <td>
+                    <i>"@Html.DisplayFor(modelItem => item.Text)"</i>
+                </td>
+            </dl>  
+        }
+    </div>
+}
+<hr />
 <div>
 <a asp-action="Index">@Localizer["BackToList"].Value</a>
 </div>
