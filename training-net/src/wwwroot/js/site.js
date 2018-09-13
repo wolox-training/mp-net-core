@@ -14,10 +14,10 @@ $(function () {
             url: "../api/v1/Comment/AddComment",
             data: { "id": movieId, "text": text },
             success: function (result) {
-                alert("Todo piola");
+                alert("Thanks for your comment!");
             },
             error: function (jqXHR, state, error) {
-                alert("Todo maaaal");
+                alert("The comment cannot be added");
             },
             complete: function (jqXHR, state) {
                 $('#commentsTable').append( `<dl> <td>${commentsQty} | <strong>${userName}</strong> says:</td> <td><i>${text}</i></td></dl>`);
