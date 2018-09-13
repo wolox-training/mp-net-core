@@ -15,17 +15,15 @@
             @UserManager.GetUserName(User) says:    
         </dt>
         <dd>
-            <form>       
-                <input type="hidden" name="currentUser" value="@UserManager.GetUserName(User)" />
-                <textarea name="comment" value="Write your comment here..." rows="5" cols="50"></textarea>
-                <input type="submit" value="@Localizer["Send"]"/>
-            </form>
+            <div>
+                <input id="movieId" type="hidden" value="@Model.Id" />      
+                <input id="formUserName" type="hidden" name="currentUser" value="@UserManager.GetUserName(User)" />
+                <textarea id="formText" name="comment" value="Write your comment here..." rows="5" cols="50"></textarea>
+                <button id="submitBtn" href="javascript:void(0)">@Localizer["Send"]</button>
+            </div>
         </dd>
     </dl>
 </div>
-<input type="text" name="id" value="19" id="movieId" />       
-<a id="submitBtn" href="javascript:void(0)">Link</a>
-
 @{int commentsQty = Model.Comments.Count();}
 @if( commentsQty > 0 )
 {

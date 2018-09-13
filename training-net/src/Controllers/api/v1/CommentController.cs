@@ -42,7 +42,8 @@ namespace training_net.Api.V1.Controllers
             }));
         }
 
-        public IActionResult AddComment(int? id,[FromForm] string text)
+        [HttpPost("AddComment")]
+        public IActionResult AddComment(int? id,string text)
         {
             try
             {
@@ -56,9 +57,9 @@ namespace training_net.Api.V1.Controllers
                 CommentViewModel commentVM = new CommentViewModel {
                     UserName = comment.User.UserName,
                     Id = comment.Id,
-                    
-                }
-                return 
+                    Text = comment.Text                   
+                };
+                return Json(commentVM); 
             }
             catch (DbUpdateConcurrencyException)
             {

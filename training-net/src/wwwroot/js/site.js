@@ -3,41 +3,26 @@
 
 // Write your JavaScript code.
 
-
-$(function()
-    {
-        $('#submitBtn').click(function()
-        {
-            var movieId = $('#movieId').val();
-            $.ajax({
-                type: "GET",
-                url: "../api/v1/Comment/Comments",
-                dataType: "json",
-                data: {id: movieId},
-                success: function (result)
-                {
-                    $('#commentsTable').empty();
-                    result.foreach(function(element){
-                        console.log(element);
-                    });
-                    /* {
-                        var comment = 
-                        ` <dl class="dl-horizontal">
-                        <td>
-                         | <strong> </strong> says:
-                        </td>
-                        <td>
-                        <i>"@Html.DisplayFor(modelItem => item.Text)"</i>
-                        </td>
-                        </dl> ` ;
-                    } */
-                    alert("El comentario ha sido cargado");
-                },
-                error: function (error)
-                {
-                    debugger;
-                    alert("Hubo un error");
-                }
-            })
+$(function () {
+    $('#submitBtn').click(function () {
+        var userName = $('#formUserName').val();
+        var text = $('#formText').val();
+        var movieId = $('#movieId').val();
+        $.ajax({
+            type: "POST",
+            url: "../api/v1/Comment/AddComment",
+            data: { "id": movieId, "text": text },
+            success: function (result) {
+                debugger;
+                alert("Todo piola");
+            },
+            error: function (jqXHR, state, error) {
+                debugger;
+                alert("Todo maaaal");
+            },
+            complete: function (jqXHR, state) {
+                $('#commentsTable').append("<dl> <td> # | <strong>" + userName + "</strong> says:</td> <td> <i>" + text + "</i></td></dl>");
+            }
         })
+    })
 });
