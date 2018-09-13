@@ -25,12 +25,11 @@
     </dl>
 </div>
 @{int commentsQty = Model.Comments.Count();}
-@if( commentsQty > 0 )
-{
+<div>
     <hr />
     <div>
         <h4>Comments!</h4>
-        <p>There are (@commentsQty) comments</p>
+        There are <strong id="commentsQty" data-qty="@commentsQty">(@commentsQty)</strong> comments
         <div id="commentsTable">
             @foreach (var item in Model.Comments)
             {
@@ -45,8 +44,7 @@
             }
         </div>
     </div>
-}
-
+</div>
 <hr />
 <div>
 <a asp-action="Index">@Localizer["BackToList"].Value</a>

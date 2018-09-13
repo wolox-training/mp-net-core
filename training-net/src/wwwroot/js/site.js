@@ -8,20 +8,20 @@ $(function () {
         var userName = $('#formUserName').val();
         var text = $('#formText').val();
         var movieId = $('#movieId').val();
+        var commentsQty = parseInt($('#commentsQty').data().qty);
         $.ajax({
             type: "POST",
             url: "../api/v1/Comment/AddComment",
             data: { "id": movieId, "text": text },
             success: function (result) {
-                debugger;
                 alert("Todo piola");
             },
             error: function (jqXHR, state, error) {
-                debugger;
                 alert("Todo maaaal");
             },
             complete: function (jqXHR, state) {
-                $('#commentsTable').append("<dl> <td> # | <strong>" + userName + "</strong> says:</td> <td> <i>" + text + "</i></td></dl>");
+                $('#commentsTable').append( `<dl> <td>${commentsQty} | <strong>${userName}</strong> says:</td> <td><i>${text}</i></td></dl>`);
+                $('#commentsQty').html(commentsQty+1);
             }
         })
     })
