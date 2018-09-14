@@ -12,6 +12,7 @@ using training_net.Models;
 using training_net.Repositories.Database;
 using training_net.Repositories.Interfaces;
 using training_net.Mail;
+using System;
 
 namespace training_net
 {
@@ -29,7 +30,7 @@ namespace training_net
         {
             services.AddJsonLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc().AddViewLocalization();
-            services.AddDbContext<DataBaseContext>(options =>  options.UseNpgsql(Configuration["ConnectionString"]));
+            services.AddDbContext<DataBaseContext>(options => options.UseNpgsql(Configuration["ConnectionString"]));
             services.AddIdentity<User, IdentityRole>()
                    .AddEntityFrameworkStores<DataBaseContext>()
                    .AddDefaultTokenProviders();
@@ -41,9 +42,9 @@ namespace training_net
             });
             services.Configure<CookiePolicyOptions>(options =>
             {
-               // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-               options.CheckConsentNeeded = context => true;
-               options.MinimumSameSitePolicy = SameSiteMode.None;
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             services.AddScoped<DataBaseContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -86,6 +87,11 @@ namespace training_net
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Training NET API V1");
             });
             Mailer.SetAccountConfiguration(Configuration);
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<DataBaseContext>();
+                context.Database.Migrate();
+            }
         }
     }
 }

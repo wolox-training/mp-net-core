@@ -4,7 +4,7 @@
 
 @{ViewData["DetailsDeleteTitle"] = Localizer["SendMovieInfoTitle"].Value;}
 <partial name="~/Views/Shared/_Details.cshtml" view-data="ViewData"  />
-<form asp-controller="Movies" asp-action="Index" method="post">
+<form asp-controller="Movies" asp-action="SendMovieInfo" method="post">
     <p>
         @Localizer["SendTo"]: <input type="text" name="EmailAddress">
         <input type="submit" value="@Localizer["Send"]" />
