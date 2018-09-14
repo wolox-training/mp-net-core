@@ -243,7 +243,7 @@ namespace training_net.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed([FromForm] int? id)
         {
-            var movieM = UnitOfWork.MovieRepository.Get(id.Value);
+            var movieM = UnitOfWork.MovieRepository.GetMovieWithComments(id.Value);
             UnitOfWork.MovieRepository.Remove(movieM);
             UnitOfWork.Complete();
             return RedirectToAction("Index", "Movie");
