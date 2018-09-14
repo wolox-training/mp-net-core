@@ -167,7 +167,7 @@ namespace training_net.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                if(ModelState.IsValid)
                 {
                     var movieM = UnitOfWork.MovieRepository.Get(id);
                     movieM.Id = id;
