@@ -19,7 +19,7 @@ namespace training_net.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<User> _userManager;
-        
+
         public MovieController(IUnitOfWork unitOfWork, UserManager<User> userManager)
         {
             this._unitOfWork = unitOfWork;
@@ -39,59 +39,59 @@ namespace training_net.Controllers
         [HttpGet("")]
         public IActionResult Index(string movieGenre, string searchString, string sortOrder, int? page, int? pageSize)
         {
-            if(!pageSize.HasValue)
-                pageSize = 10;            
+            if (!pageSize.HasValue)
+                pageSize = 10;
             ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             ViewData["GenreSortParm"] = sortOrder == "genre" ? "genre_desc" : "genre";
-            ViewData["DateSortParm"] = sortOrder == "date" ? "date_desc" : "date";  
+            ViewData["DateSortParm"] = sortOrder == "date" ? "date_desc" : "date";
             ViewData["PriceSortParm"] = sortOrder == "price" ? "price_desc" : "price";
             ViewData["RatingSortParm"] = sortOrder == "rating" ? "rating_desc" : "rating";
             var movies = UnitOfWork.MovieRepository.GetAll();
             var genreQuery = movies.OrderBy(m => m.Genre).Select(m => m.Genre).Distinct().ToList();
             if (!String.IsNullOrEmpty(searchString))
                 movies = movies.Where(m => m.Title.ToLower().Contains(searchString.ToLower()));
-            if(!String.IsNullOrEmpty(movieGenre))
+            if (!String.IsNullOrEmpty(movieGenre))
                 movies = movies.Where(m => m.Genre == movieGenre);
             switch (sortOrder)
-                {
-                    case "rating_desc":
-                        movies = movies.OrderByDescending(m => m.Rating).ToList();
-                        break;
-                    case "rating":
-                        movies =movies.OrderBy(m => m.Rating).ToList();
-                        break;
-                    case "price_desc":
-                        movies =movies.OrderByDescending(m => m.Price).ToList();
-                        break;
-                    case "price":
-                        movies =movies.OrderBy(m => m.Price).ToList();
-                        break;
-                    case "date_desc":
-                        movies =movies.OrderByDescending(m => m.ReleaseDate).ToList();
-                        break;
-                    case "date":
-                        movies =movies.OrderBy(m => m.ReleaseDate).ToList();
-                        break;
-                    case "title_desc":
-                        movies =movies.OrderByDescending(m => m.Title).ToList();
-                        break;
-                    case "genre":
-                        movies =movies.OrderBy(m => m.Genre).ToList();
-                        break;
-                    case "genre_desc":
-                        movies =movies.OrderByDescending(m => m.Genre).ToList();
-                        break;
-                    default:
-                        movies =movies.OrderBy(m => m.Title).ToList();
-                        break;
-                }
+            {
+                case "rating_desc":
+                    movies = movies.OrderByDescending(m => m.Rating).ToList();
+                    break;
+                case "rating":
+                    movies = movies.OrderBy(m => m.Rating).ToList();
+                    break;
+                case "price_desc":
+                    movies = movies.OrderByDescending(m => m.Price).ToList();
+                    break;
+                case "price":
+                    movies = movies.OrderBy(m => m.Price).ToList();
+                    break;
+                case "date_desc":
+                    movies = movies.OrderByDescending(m => m.ReleaseDate).ToList();
+                    break;
+                case "date":
+                    movies = movies.OrderBy(m => m.ReleaseDate).ToList();
+                    break;
+                case "title_desc":
+                    movies = movies.OrderByDescending(m => m.Title).ToList();
+                    break;
+                case "genre":
+                    movies = movies.OrderBy(m => m.Genre).ToList();
+                    break;
+                case "genre_desc":
+                    movies = movies.OrderByDescending(m => m.Genre).ToList();
+                    break;
+                default:
+                    movies = movies.OrderBy(m => m.Title).ToList();
+                    break;
+            }
             var moviesAndGenresVM = new MoviesAndGenresViewModel();
             moviesAndGenresVM.CurrentSearch = searchString;
             moviesAndGenresVM.CurrentGenre = movieGenre;
             moviesAndGenresVM.CurrentSort = sortOrder;
             moviesAndGenresVM.CurrentPageSize = pageSize.Value;
             moviesAndGenresVM.GenreList = new SelectList(genreQuery);
-            var movieList = movies.Select( 
+            var movieList = movies.Select(
             movie => new MovieViewModel
             {
                 Id = movie.Id,
@@ -101,7 +101,7 @@ namespace training_net.Controllers
                 Price = movie.Price,
                 Rating = movie.Rating
             }).ToList();
-            moviesAndGenresVM.MovieList = PaginatedList<MovieViewModel>.Create(movieList, page ?? 1, pageSize.Value);    
+            moviesAndGenresVM.MovieList = PaginatedList<MovieViewModel>.Create(movieList, page ?? 1, pageSize.Value);
             return View(moviesAndGenresVM);
         }
 
@@ -214,30 +214,6 @@ namespace training_net.Controllers
             }
         }
 
-        [HttpPost("Details")]
-        public IActionResult AddComment(int? id,[FromForm] string comment)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    UnitOfWork.CommentRepository.Add(new Comment
-                    {
-                        User = UserManager.GetUserAsync(User).Result,
-                        Text = comment,
-                        Movie = UnitOfWork.MovieRepository.Get(id.Value) 
-                    });
-                    UnitOfWork.Complete();
-                    return RedirectToAction("Details", "Movie", new { id = id.Value});
-                }
-                return View(id.Value);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
-        }
-        
         [HttpGet("Delete")]
         public IActionResult Delete(int? id)
         {
@@ -260,7 +236,7 @@ namespace training_net.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 throw;
-            }            
+            }
         }
 
         [HttpPost("Delete")]
@@ -310,7 +286,7 @@ namespace training_net.Controllers
                 var movie = UnitOfWork.MovieRepository.Get(id.Value);
                 if (movie == null)
                     throw new NullReferenceException();
-                string bodyMsg =    $@"Title: {movie.Title}{Environment.NewLine}
+                string bodyMsg = $@"Title: {movie.Title}{Environment.NewLine}
                                     Genre: {movie.Genre}{Environment.NewLine}
                                     Release date: {movie.ReleaseDate.ToShortDateString()}{Environment.NewLine}
                                     Price: {movie.Price}{Environment.NewLine}

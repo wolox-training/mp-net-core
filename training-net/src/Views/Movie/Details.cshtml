@@ -15,34 +15,36 @@
             @UserManager.GetUserName(User) says:    
         </dt>
         <dd>
-            <form asp-controller="Movies" asp-action="AddComment" method="post">       
-                <input type="hidden" name="currentUser" value="@UserManager.GetUserName(User)" />
-                <textarea name="comment" value="Write your comment here..." rows="5" cols="50"></textarea>
-                <input type="submit" value="@Localizer["Send"]" />
-            </form>
+            <div>
+                <input id="movieId" type="hidden" value="@Model.Id" />      
+                <input id="formUserName" type="hidden" name="currentUser" value="@UserManager.GetUserName(User)" />
+                <textarea id="formText" name="comment" value="Write your comment here..." rows="5" cols="50"></textarea>
+                <button id="submitBtn" href="javascript:void(0)">@Localizer["Send"]</button>
+            </div>
         </dd>
     </dl>
 </div>
 @{int commentsQty = Model.Comments.Count();}
-@if( commentsQty > 0 )
-{
+<div>
     <hr />
     <div>
         <h4>Comments!</h4>
-        <p>There are (@commentsQty) comments</p>
-        @foreach (var item in Model.Comments)
-        {
-            <dl class="dl-horizontal">
-                <td>
-                    @Model.Comments.IndexOf(item) | <strong>@Html.DisplayFor(modelItem => item.User.UserName)</strong> says:
-                </td>
-                <td>
-                    <i>"@Html.DisplayFor(modelItem => item.Text)"</i>
-                </td>
-            </dl>  
-        }
+        There are <strong id="commentsQty" data-qty="@commentsQty">(@commentsQty)</strong> comments
+        <div id="commentsTable">
+            @foreach (var item in Model.Comments)
+            {
+                <dl class="dl-horizontal">
+                    <td>
+                        @Model.Comments.IndexOf(item) | <strong>@Html.DisplayFor(modelItem => item.User.UserName)</strong> says:
+                    </td>
+                    <td>
+                        <i>"@Html.DisplayFor(modelItem => item.Text)"</i>
+                    </td>
+                </dl>  
+            }
+        </div>
     </div>
-}
+</div>
 <hr />
 <div>
 <a asp-action="Index">@Localizer["BackToList"].Value</a>
